@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IntroController">
+   <children>
+      <ImageView fitHeight="426.0" fitWidth="365.0" layoutX="118.0" layoutY="-30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/1.png" />
+         </image>
+      </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="188.0" layoutY="341.0" onAction="#btnAdminOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Admin" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="323.0" layoutY="341.0" onAction="#btnEmployeeOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Employee" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="245.0" layoutY="305.0" text="Choose User Type" />
+   </children>
+</AnchorPane>

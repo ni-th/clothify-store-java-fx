@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboard">
+   <children>
+      <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Admin Dashboard">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXPasswordField layoutX="205.0" layoutY="49.0" promptText="password" />
+                        <JFXPasswordField layoutX="205.0" layoutY="89.0" promptText="repeat password" />
+                        <Label layoutX="14.0" layoutY="14.0" text="Admin Details">
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="250.0" layoutY="130.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Update" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <Label layoutX="21.0" layoutY="53.0" text="Name : " />
+                        <Label layoutX="67.0" layoutY="53.0" text="Nimantha" />
+                        <Label layoutX="21.0" layoutY="93.0" text="ID : " />
+                        <Label layoutX="67.0" layoutY="93.0" text="Nimantha" />
+                        <Label layoutX="195.0" layoutY="14.0" text="Update Details">
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Register">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXPasswordField layoutX="38.0" layoutY="87.0" promptText="temporary password" />
+                        <Label layoutX="55.0" layoutY="22.0" text="Employee Regsitration">
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="172.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXTextField layoutX="38.0" layoutY="54.0" promptText="name" />
+                        <JFXComboBox layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="134.0" promptText="employee type" visibleRowCount="5" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="ProductManagement">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
