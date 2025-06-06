@@ -1,6 +1,8 @@
 package service.custom.impl;
 
 import model.dto.EmployeeDTO;
+import model.entity.EmployeeEntity;
+import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
 import repository.custom.impl.EmployeeDAOImpl;
@@ -42,14 +44,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO loginUser(String username, String password) throws SQLException {
-        ResultSet resultSet = CRUDUtil.execute("SELECT * FROM user WHERE email = ? AND password = ?", username,password);
-        if (resultSet.next())
-            return new EmployeeDTO(
-                    resultSet.getString("user_id"),
-                    resultSet.getString("password"),
-                    resultSet.getString("email"),
-                    resultSet.getString("user_type")
-            );
+
+        EmployeeEntity employeeEntity = employeeDAO.searchById(username);
+        EmployeeDTO employeeDTO = new ModelMapper().map(employeeEntity, EmployeeDTO.class);
+        System.out.println(employeeEntity);
+        if (employeeDTO.getPassword().equals(password)){
+            return employeeDTO;
+        }
         return null;
+
+
     }
 }
