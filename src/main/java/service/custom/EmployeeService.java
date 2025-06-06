@@ -1,17 +1,17 @@
 package service.custom;
 
-import model.Employee;
+import model.dto.EmployeeDTO;
 import service.SuperService;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface EmployeeService extends SuperService {
-    Boolean addEmployee(Employee employee);
-    Boolean updateEmployee(Employee employee);
-    Boolean deleteEmployee(Employee employee);
-    Employee searchById(String id);
-    List<Employee> getAll();
+//    Boolean addEmployee(EmployeeDTO employeeDTO);
+//    Boolean updateEmployee(EmployeeDTO employeeDTO);
+//    Boolean deleteEmployee(EmployeeDTO employeeDTO);
+//    EmployeeDTO searchById(String id);
+//    List<EmployeeDTO> getAll();
 
-    Employee loginUser(String username, String password) throws SQLException;
+    EmployeeDTO loginUser(String username, String password) throws SQLException;
 }

@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboard">
    <children>
       <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
@@ -48,7 +47,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Register">
+          <Tab disable="true" text="Register">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -67,7 +66,7 @@
                            </cursor>
                         </JFXButton>
                         <JFXTextField layoutX="38.0" layoutY="54.0" promptText="name" />
-                        <JFXComboBox layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="134.0" promptText="employee type" visibleRowCount="5" />
+                        <JFXComboBox layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="134.0" promptText="employeeDTO type" visibleRowCount="5" />
                      </children>
                   </AnchorPane>
             </content>

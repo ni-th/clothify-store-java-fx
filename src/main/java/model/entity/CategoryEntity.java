@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Employee {
-    private String user_id;
-    private String password;
-    private String email;
-    private String user_type;
-
+public class CategoryEntity {
+    private String category_id;
+    private String description;
+    private String category;
 }

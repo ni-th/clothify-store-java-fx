@@ -8,10 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import model.Employee;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
-import service.custom.impl.EmployeeServiceImpl;
 import util.ServiceType;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package model;
+package model.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Product {
+public class ProductDTO {
     private String product_id;
     private String product_name;
     private String category;
