@@ -47,7 +47,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         EmployeeEntity employeeEntity = employeeDAO.searchById(username);
         EmployeeDTO employeeDTO = new ModelMapper().map(employeeEntity, EmployeeDTO.class);
-        System.out.println(employeeEntity);
         if (employeeDTO.getPassword().equals(password)){
             return employeeDTO;
         }

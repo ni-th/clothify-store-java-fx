@@ -1,11 +1,9 @@
 package repository;
 
-import repository.custom.CategoryDAO;
-import repository.custom.impl.CategoryDAOImpl;
+import repository.custom.impl.UserDAOImpl;
 import repository.custom.impl.EmployeeDAOImpl;
 import repository.custom.impl.ProductDAOImpl;
 import util.RepositoryType;
-import util.ServiceType;
 
 public class DaoFactory {
     private static DaoFactory instance;
@@ -18,7 +16,7 @@ public class DaoFactory {
         switch (type){
             case EMPLOYEE: return (T) new EmployeeDAOImpl();
             case PRODUCT: return (T) new ProductDAOImpl();
-            case CATEGORY: return (T) new CategoryDAOImpl();
+            case CATEGORY: return (T) new UserDAOImpl();
         }
         return null;
     }

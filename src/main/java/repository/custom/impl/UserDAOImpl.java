@@ -1,11 +1,11 @@
 package repository.custom.impl;
 
 import model.entity.CategoryEntity;
-import repository.custom.CategoryDAO;
+import repository.custom.UserDAO;
 
 import java.util.List;
 
-public class CategoryDAOImpl implements CategoryDAO {
+public class UserDAOImpl implements UserDAO {
     @Override
     public boolean add(CategoryEntity entity) {
         return false;
