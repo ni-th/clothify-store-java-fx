@@ -15,7 +15,7 @@
             <Image url="@../images/1.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="188.0" layoutY="341.0" onAction="#btnAdminOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Admin" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="181.0" layoutY="341.0" onAction="#btnAdminOnAction" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: gray;" text="Super Admin" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="323.0" layoutY="341.0" onAction="#btnEmployeeOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Employee" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="316.0" layoutY="341.0" onAction="#btnEmployeeOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Cashier" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
