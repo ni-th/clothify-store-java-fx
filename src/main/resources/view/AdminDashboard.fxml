@@ -3,12 +3,15 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboard">
@@ -47,17 +50,17 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab disable="true" text="Register">
+          <Tab text="Register">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXPasswordField layoutX="38.0" layoutY="87.0" promptText="temporary password" />
+                        <JFXPasswordField layoutX="38.0" layoutY="126.0" promptText="temporary password" />
                         <Label layoutX="55.0" layoutY="22.0" text="Employee Regsitration">
                            <font>
                               <Font name="Calibri Bold" size="18.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="172.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="211.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -65,15 +68,56 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXTextField layoutX="38.0" layoutY="54.0" promptText="name" />
-                        <JFXComboBox layoutX="38.0" layoutY="127.0" prefHeight="25.0" prefWidth="134.0" promptText="employeeDTO type" visibleRowCount="5" />
+                        <JFXTextField editable="false" layoutX="38.0" layoutY="54.0" promptText="ID" />
+                        <JFXComboBox layoutX="38.0" layoutY="166.0" prefHeight="25.0" prefWidth="134.0" promptText="employeeDTO type" visibleRowCount="5" />
+                        <Label layoutX="303.0" layoutY="22.0" text="Suplier Regsitration">
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="418.0" layoutY="211.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXTextField layoutX="288.0" layoutY="89.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of fthe Suplier" />
+                        <JFXTextField layoutX="288.0" layoutY="126.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
+                        <JFXTextField layoutX="288.0" layoutY="166.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
+                        <JFXTextField layoutX="38.0" layoutY="91.0" promptText="name" />
+                        <JFXTextField editable="false" layoutX="288.0" layoutY="54.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
             <Tab text="ProductManagement">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="366.0" layoutX="22.0" layoutY="42.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                        <JFXTextField editable="false" layoutX="40.0" layoutY="63.0" prefHeight="25.0" prefWidth="199.0" promptText="Product ID" />
+                        <JFXTextField layoutX="40.0" layoutY="103.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Name" />
+                        <JFXComboBox layoutX="40.0" layoutY="142.0" prefHeight="25.0" prefWidth="199.0" promptText="Category" />
+                        <JFXTextField layoutX="41.0" layoutY="186.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Color" />
+                        <JFXTextField layoutX="41.0" layoutY="225.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Size" />
+                        <JFXTextField layoutX="299.0" layoutY="63.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Image Link" />
+                        <JFXTextField layoutX="300.0" layoutY="103.0" prefHeight="25.0" prefWidth="197.0" promptText="Product qty" />
+                        <JFXTextField layoutX="300.0" layoutY="146.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Cost Price" />
+                        <JFXTextField layoutX="299.0" layoutY="185.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Selling Price" />
+                        <JFXComboBox layoutX="299.0" layoutY="223.0" prefHeight="25.0" prefWidth="199.0" promptText="Supplier" />
+                        <DatePicker layoutX="300.0" layoutY="269.0" prefHeight="25.0" prefWidth="198.0" promptText="Added Date" />
+                        <JFXTextArea layoutX="36.0" layoutY="269.0" prefHeight="99.0" prefWidth="208.0" promptText="Product Description" />
+                        <JFXButton buttonType="RAISED" layoutX="299.0" layoutY="338.0" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>
