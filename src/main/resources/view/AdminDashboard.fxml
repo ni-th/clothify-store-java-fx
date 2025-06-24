@@ -54,7 +54,9 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXPasswordField layoutX="38.0" layoutY="126.0" promptText="temporary password" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="259.0" layoutX="329.0" layoutY="14.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="254.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="259.0" layoutX="20.0" layoutY="14.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="254.0" />
+                        <JFXPasswordField layoutX="38.0" layoutY="126.0" promptText="Temporary Password" />
                         <Label layoutX="55.0" layoutY="22.0" text="Employee Regsitration">
                            <font>
                               <Font name="Calibri Bold" size="18.0" />
@@ -69,13 +71,13 @@
                            </cursor>
                         </JFXButton>
                         <JFXTextField editable="false" layoutX="38.0" layoutY="54.0" promptText="ID" />
-                        <JFXComboBox layoutX="38.0" layoutY="166.0" prefHeight="25.0" prefWidth="134.0" promptText="employeeDTO type" visibleRowCount="5" />
-                        <Label layoutX="303.0" layoutY="22.0" text="Suplier Regsitration">
+                        <JFXComboBox layoutX="38.0" layoutY="166.0" prefHeight="25.0" prefWidth="134.0" promptText="Employee Type" visibleRowCount="5" />
+                        <Label layoutX="358.0" layoutY="26.0" text="Suplier Regsitration">
                            <font>
                               <Font name="Calibri Bold" size="18.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="418.0" layoutY="211.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="473.0" layoutY="215.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -83,11 +85,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXTextField layoutX="288.0" layoutY="89.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of fthe Suplier" />
-                        <JFXTextField layoutX="288.0" layoutY="126.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
-                        <JFXTextField layoutX="288.0" layoutY="166.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
-                        <JFXTextField layoutX="38.0" layoutY="91.0" promptText="name" />
-                        <JFXTextField editable="false" layoutX="288.0" layoutY="54.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
+                        <JFXTextField layoutX="343.0" layoutY="93.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of fthe Suplier" />
+                        <JFXTextField layoutX="343.0" layoutY="130.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
+                        <JFXTextField layoutX="343.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
+                        <JFXTextField layoutX="38.0" layoutY="91.0" promptText="Name" />
+                        <JFXTextField editable="false" layoutX="343.0" layoutY="58.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
                      </children>
                   </AnchorPane>
             </content>
@@ -108,8 +110,39 @@
                         <JFXTextField layoutX="299.0" layoutY="185.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Selling Price" />
                         <JFXComboBox layoutX="299.0" layoutY="223.0" prefHeight="25.0" prefWidth="199.0" promptText="Supplier" />
                         <DatePicker layoutX="300.0" layoutY="269.0" prefHeight="25.0" prefWidth="198.0" promptText="Added Date" />
-                        <JFXTextArea layoutX="36.0" layoutY="269.0" prefHeight="99.0" prefWidth="208.0" promptText="Product Description" />
+                        <JFXTextArea layoutX="39.0" layoutY="269.0" prefHeight="99.0" prefWidth="205.0" promptText="Product Description" />
                         <JFXButton buttonType="RAISED" layoutX="299.0" layoutY="338.0" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="366.0" layoutX="562.0" layoutY="40.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                        <JFXTextField editable="false" layoutX="580.0" layoutY="61.0" prefHeight="25.0" prefWidth="199.0" promptText="Product ID" />
+                        <JFXTextField disable="true" layoutX="580.0" layoutY="101.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Name" />
+                        <JFXComboBox disable="true" layoutX="580.0" layoutY="140.0" prefHeight="25.0" prefWidth="199.0" promptText="Category" />
+                        <JFXTextField disable="true" layoutX="581.0" layoutY="184.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Color" />
+                        <JFXTextField disable="true" layoutX="581.0" layoutY="223.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Size" />
+                        <JFXTextField disable="true" layoutX="839.0" layoutY="61.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Image Link" />
+                        <JFXTextField disable="true" layoutX="840.0" layoutY="101.0" prefHeight="25.0" prefWidth="197.0" promptText="Product qty" />
+                        <JFXTextField disable="true" layoutX="840.0" layoutY="144.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Cost Price" />
+                        <JFXTextField disable="true" layoutX="839.0" layoutY="183.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Selling Price" />
+                        <JFXComboBox disable="true" layoutX="839.0" layoutY="221.0" prefHeight="25.0" prefWidth="199.0" promptText="Supplier" />
+                        <DatePicker disable="true" layoutX="840.0" layoutY="267.0" prefHeight="25.0" prefWidth="198.0" promptText="Added Date" />
+                        <JFXTextArea disable="true" layoutX="580.0" layoutY="267.0" prefHeight="99.0" prefWidth="204.0" promptText="Product Description" />
+                        <JFXButton buttonType="RAISED" disable="true" layoutX="839.0" layoutY="336.0" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Update" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="71.0" layoutX="22.0" layoutY="427.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                        <JFXTextField editable="false" layoutX="40.0" layoutY="448.0" prefHeight="25.0" prefWidth="199.0" promptText="Product ID" />
+                        <JFXButton buttonType="RAISED" layoutX="299.0" layoutY="442.0" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Delete" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
