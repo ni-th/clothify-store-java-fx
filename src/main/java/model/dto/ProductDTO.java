@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ProductDTO {
-    private String product_id;
-    private String product_name;
+    private String id;
+    private String name;
     private String category;
     private String color;
     private String size;

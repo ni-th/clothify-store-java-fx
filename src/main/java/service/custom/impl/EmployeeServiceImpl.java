@@ -13,34 +13,11 @@ import util.ServiceType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDAO employeeDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
-//    @Override
-//    public Boolean addEmployee(EmployeeDTO employeeDTO) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Boolean updateEmployee(EmployeeDTO employeeDTO) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Boolean deleteEmployee(EmployeeDTO employeeDTO) {
-//        return null;
-//    }
-//
-//    @Override
-//    public EmployeeDTO searchById(String id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<EmployeeDTO> getAll() {
-//        return List.of();
-//    }
 
     @Override
     public EmployeeDTO loginUser(String username, String password) throws SQLException {
@@ -53,5 +30,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
 
 
+    }
+
+    @Override
+    public List<EmployeeDTO> getAll() {
+        List<EmployeeEntity> all = employeeDAO.getAll();
+        List<EmployeeDTO> list = new ArrayList<>();
+        all.forEach(employeeEntity -> {
+            list.add(new ModelMapper().map(employeeEntity, EmployeeDTO.class));
+        });
+        return  list;
     }
 }

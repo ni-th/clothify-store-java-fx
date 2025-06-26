@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
+import service.custom.UserService;
 import util.ServiceType;
+import util.SessionManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +25,7 @@ public class AdminLoginController implements Initializable {
     public JFXTextField txtEmail;
 
     EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +50,8 @@ public class AdminLoginController implements Initializable {
             showAlert("Admin not Existed!");
             return;
         }
+        SessionManager.getInstance().setUser(employeeService.loginUser(txtEmail.getText(), txtPassword.getText()));
+
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashboard.fxml"))));
         stage.show();

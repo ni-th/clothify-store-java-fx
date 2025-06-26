@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CategoryDTO {
-    private String category_id;
+    private String id;
     private String description;
     private String category;
 }

@@ -2,8 +2,10 @@ package repository.custom.impl;
 
 import model.dto.EmployeeDTO;
 import model.entity.EmployeeEntity;
+import org.hibernate.Session;
 import repository.custom.EmployeeDAO;
 import util.CRUDUtil;
+import util.HibernateUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +34,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         if (resultSet.next())
             return new EmployeeEntity(
                     resultSet.getString("user_id"),
+                    resultSet.getString("user_name"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
                     resultSet.getString("user_type")
@@ -41,6 +44,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public List<EmployeeEntity> getAll() {
-        return List.of();
+        Session session = HibernateUtil.getSession();
+        return session.createQuery("FROM EmployeeEntity", EmployeeEntity.class).getResultList();
     }
 }

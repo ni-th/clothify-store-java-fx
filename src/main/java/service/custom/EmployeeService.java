@@ -14,4 +14,6 @@ public interface EmployeeService extends SuperService {
 //    List<EmployeeDTO> getAll();
 
     EmployeeDTO loginUser(String username, String password) throws SQLException;
+
+    List<EmployeeDTO> getAll();
 }

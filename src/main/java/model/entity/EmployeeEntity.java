@@ -1,5 +1,6 @@
 package model.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -7,8 +8,13 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
+@Entity
+@Table(name = "user")
 public class EmployeeEntity {
-    private String user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
+    private String name;
     private String password;
     private String email;
     private String user_type;
