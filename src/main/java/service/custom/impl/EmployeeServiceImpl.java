@@ -41,4 +41,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         });
         return  list;
     }
+
+    @Override
+    public Boolean add(EmployeeDTO employee) {
+        EmployeeEntity mapped = new ModelMapper().map(employee, EmployeeEntity.class);
+        return employeeDAO.add(mapped);
+    }
 }

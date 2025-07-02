@@ -1,6 +1,7 @@
 package service.custom;
 
 import model.dto.EmployeeDTO;
+import model.entity.EmployeeEntity;
 import service.SuperService;
 
 import java.sql.SQLException;
@@ -16,4 +17,6 @@ public interface EmployeeService extends SuperService {
     EmployeeDTO loginUser(String username, String password) throws SQLException;
 
     List<EmployeeDTO> getAll();
+
+    Boolean add(EmployeeDTO employee);
 }

@@ -78,14 +78,14 @@
                            <children>
                               <Pane prefHeight="271.0" prefWidth="296.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="259.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="254.0" />
-                                    <JFXPasswordField layoutX="18.0" layoutY="112.0" promptText="Temporary Password" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="282.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="254.0" />
+                                    <JFXPasswordField fx:id="txtEmpPassword" layoutX="21.0" layoutY="110.0" prefHeight="25.0" prefWidth="213.0" promptText="Temporary Password" />
                                     <Label layoutX="35.0" layoutY="8.0" text="Employee Regsitration">
                                        <font>
                                           <Font name="Calibri Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton buttonType="RAISED" layoutX="132.0" layoutY="197.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="144.0" layoutY="224.0" onAction="#btnOnActionAddEmployee" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -93,9 +93,10 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <JFXTextField editable="false" layoutX="18.0" layoutY="40.0" promptText="ID" />
-                                    <JFXComboBox layoutX="18.0" layoutY="152.0" prefHeight="25.0" prefWidth="134.0" promptText="Employee Type" visibleRowCount="5" />
-                                    <JFXTextField layoutX="18.0" layoutY="77.0" promptText="Name" />
+                                    <JFXTextField fx:id="txtEmpID" layoutX="21.0" layoutY="38.0" prefHeight="25.0" prefWidth="213.0" promptText="ID" />
+                                    <JFXComboBox fx:id="cmbEmployeeType" layoutX="21.0" layoutY="179.0" prefHeight="25.0" prefWidth="213.0" promptText="Employee Type" visibleRowCount="5" />
+                                    <JFXTextField fx:id="txtEmpName" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="213.0" promptText="Name" />
+                                    <JFXTextField fx:id="txtEmpEmail" layoutX="21.0" layoutY="145.0" prefHeight="25.0" prefWidth="213.0" promptText="Email" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="259.0" prefWidth="255.0" GridPane.columnIndex="1">
@@ -106,7 +107,7 @@
                                           <Font name="Calibri Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton buttonType="RAISED" layoutX="145.0" layoutY="201.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="145.0" layoutY="201.0" onAction="#btnOnActionAddSuplier" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -114,10 +115,10 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <JFXTextField layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of fthe Suplier" />
-                                    <JFXTextField layoutX="15.0" layoutY="116.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
-                                    <JFXTextField layoutX="15.0" layoutY="156.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
-                                    <JFXTextField editable="false" layoutX="15.0" layoutY="44.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
+                                    <JFXTextField fx:id="txtSuplierName" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of the Suplier" />
+                                    <JFXTextField fx:id="txtSuplierCompany" layoutX="15.0" layoutY="116.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
+                                    <JFXTextField fx:id="txtSuplierEmail" layoutX="15.0" layoutY="156.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
+                                    <JFXTextField fx:id="txtSuplierID" editable="false" layoutX="15.0" layoutY="44.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="328.0" prefWidth="415.0" GridPane.columnIndex="2">
@@ -128,7 +129,7 @@
                                           <Font name="Calibri Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton buttonType="RAISED" disable="true" layoutX="144.0" layoutY="202.0" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" disable="true" layoutX="144.0" layoutY="202.0" onAction="#btnOnActionDeleteEmployee" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -136,7 +137,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <JFXTextField editable="false" layoutX="14.0" layoutY="45.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
+                                    <JFXTextField fx:id="txtEmployeeDelete" editable="false" layoutX="14.0" layoutY="45.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
                                  </children>
                               </Pane>
                            </children>

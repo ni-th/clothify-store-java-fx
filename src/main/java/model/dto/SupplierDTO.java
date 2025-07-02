@@ -1,19 +1,19 @@
 package model.dto;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
-public class EmployeeDTO {
+@Setter
+public class SupplierDTO {
     private String id;
     private String name;
+    private String companyName;
     private String email;
-    private String password;
-    private String user_type;
-
 }
