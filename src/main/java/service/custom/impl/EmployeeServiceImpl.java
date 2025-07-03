@@ -23,9 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO loginUser(String username, String password) throws SQLException {
 
         EmployeeEntity employeeEntity = employeeDAO.searchById(username);
-        EmployeeDTO employeeDTO = new ModelMapper().map(employeeEntity, EmployeeDTO.class);
-        if (employeeDTO.getPassword().equals(password)){
-            return employeeDTO;
+        if (employeeEntity == null){
+            return null;
+        }
+        if (employeeEntity.getPassword().equals(password)){
+            return new ModelMapper().map(employeeEntity, EmployeeDTO.class);
         }
         return null;
 
