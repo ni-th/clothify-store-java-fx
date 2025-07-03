@@ -10,8 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import model.dto.EmployeeDTO;
+import model.dto.SupplierDTO;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
+import service.custom.SupplierService;
 import util.ServiceType;
 import util.SessionManager;
 
@@ -36,6 +38,7 @@ public class AdminDashboardController implements Initializable {
     public JFXTextField txtEmpEmail;
 
     EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+    SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,9 +93,6 @@ public class AdminDashboardController implements Initializable {
         String txtEmpEmailText = txtEmpEmail.getText();
         String cmbEmployeeTypeValue = cmbEmployeeType.getValue().toString();
 
-
-
-
         Boolean added = employeeService.add(new EmployeeDTO(txtEmpIDText, txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
         if (added){
             showInfoAlert("Employee Added Successfully");
@@ -103,6 +103,21 @@ public class AdminDashboardController implements Initializable {
     }
 
     public void btnOnActionAddSuplier(ActionEvent actionEvent) {
+        if (txtSuplierName.getText().isEmpty() ||txtSuplierCompany.getText().isEmpty() || txtSuplierEmail.getText().isEmpty()){
+            showErrorAlert("Field is required");
+            return;
+        }
+        String txtSuplierIDText = txtSuplierID.getText();
+        String txtSuplierNameText = txtSuplierName.getText();
+        String txtSuplierCompanyText = txtSuplierCompany.getText();
+        String txtSuplierEmailText = txtSuplierEmail.getText();
+
+        Boolean added = supplierService.add(new SupplierDTO(txtSuplierIDText, txtSuplierNameText, txtSuplierCompanyText, txtSuplierEmailText));
+        if (added){
+            showInfoAlert("Supplier Added Successfully");
+        }else{
+            showInfoAlert("Supplier Not Added");
+        }
     }
 
     public void btnOnActionDeleteEmployee(ActionEvent actionEvent) {

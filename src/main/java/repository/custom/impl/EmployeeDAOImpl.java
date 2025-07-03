@@ -2,6 +2,7 @@ package repository.custom.impl;
 
 import model.dto.EmployeeDTO;
 import model.entity.EmployeeEntity;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import repository.custom.EmployeeDAO;
@@ -36,21 +37,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public EmployeeEntity searchById(String s) throws SQLException {
-        ResultSet resultSet = CRUDUtil.execute("SELECT * FROM user WHERE email = ?", s);
-        if (resultSet.next())
-            return new EmployeeEntity(
-//                    resultSet.getString("user_id"),
-//                    resultSet.getString("user_name"),
-//                    resultSet.getString("email"),
-//                    resultSet.getString("password"),
-//                    resultSet.getString("user_type")
-                    resultSet.getString("id"),
-                    resultSet.getString("name"),
-                    resultSet.getString("email"),
-                    resultSet.getString("password"),
-                    resultSet.getString("user_type")
-            );
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        EmployeeEntity employee = session.get(EmployeeEntity.class,s);
+        session.getTransaction().commit();
+        return employee;
     }
 
     @Override

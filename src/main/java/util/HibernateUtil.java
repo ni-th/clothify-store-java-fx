@@ -3,6 +3,7 @@ package util;
 import model.entity.CategoryEntity;
 import model.entity.EmployeeEntity;
 import model.entity.ProductEntity;
+import model.entity.SupplierEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -23,6 +24,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(CategoryEntity.class)
                 .addAnnotatedClass(EmployeeEntity.class)
                 .addAnnotatedClass(ProductEntity.class)
+                .addAnnotatedClass(SupplierEntity.class)
                 .getMetadataBuilder()
                 .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
                 .build();
