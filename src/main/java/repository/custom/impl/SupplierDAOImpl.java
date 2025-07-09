@@ -3,6 +3,7 @@ package repository.custom.impl;
 import model.entity.SupplierEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import repository.custom.SupplierDAO;
 import util.HibernateUtil;
 
@@ -37,6 +38,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public List<SupplierEntity> getAll() {
-        return List.of();
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        Query<SupplierEntity> fromSupplier = session.createQuery("FROM SupplierEntity", SupplierEntity.class);
+        fromSupplier.getResultList();
+        return fromSupplier.getResultList();
     }
 }

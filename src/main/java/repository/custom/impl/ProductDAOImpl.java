@@ -2,7 +2,10 @@ package repository.custom.impl;
 
 import model.dto.ProductDTO;
 import model.entity.ProductEntity;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import repository.custom.ProductDAO;
+import util.HibernateUtil;
 
 import java.util.List;
 
@@ -10,7 +13,12 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public boolean add(ProductEntity entity) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
