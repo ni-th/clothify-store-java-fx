@@ -19,5 +19,6 @@ public class SupplierEntity {
     private Integer id;
     private String name;
     private String companyName;
+    @Column(unique = true)
     private String email;
 }

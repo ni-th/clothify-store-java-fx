@@ -51,7 +51,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         EmployeeEntity employee = session.createQuery("FROM EmployeeEntity WHERE email = :email", EmployeeEntity.class)
                 .setParameter("email", username)
                 .uniqueResult();
-//        EmployeeEntity employee = session.get(EmployeeEntity.class,username);
         session.getTransaction().commit();
         return employee;
     }

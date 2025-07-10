@@ -169,7 +169,7 @@ public class AdminDashboardController implements Initializable {
         String txtSuplierCompanyText = txtSuplierCompany.getText();
         String txtSuplierEmailText = txtSuplierEmail.getText();
 
-        Boolean added = supplierService.add(new SupplierDTO(Integer.parseInt(txtSuplierIDText), txtSuplierNameText, txtSuplierCompanyText, txtSuplierEmailText));
+        Boolean added = supplierService.add(new SupplierDTO(null, txtSuplierNameText, txtSuplierCompanyText, txtSuplierEmailText));
         if (added){
             showInfoAlert("Supplier Added Successfully");
         }else{

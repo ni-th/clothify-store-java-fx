@@ -97,7 +97,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b7fff" height="694.0" layoutX="913.0" stroke="BLACK" strokeType="INSIDE" width="367.0" />
                         <TableView fx:id="tblCart" layoutX="914.0" layoutY="62.0" prefHeight="479.0" prefWidth="365.0">
                           <columns>
-                            <TableColumn fx:id="colItemName" prefWidth="152.0" text="Item Name" />
+                            <TableColumn fx:id="colItemName" prefWidth="152.0" text="name" />
                             <TableColumn fx:id="colItemCode" prefWidth="68.0" text="Item Code" />
                               <TableColumn fx:id="colQty" prefWidth="41.0" text="qty" />
                               <TableColumn fx:id="colTotal" prefWidth="104.0" text="total" />
@@ -108,7 +108,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="1097.0" layoutY="631.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Purchase" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="1097.0" layoutY="631.0" onAction="#btnOnActionPurchase" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Purchase" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -117,8 +117,8 @@
                            </cursor>
                         </JFXButton>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="366.0" layoutX="234.0" layoutY="20.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="666.0" />
-                        <JFXTextField fx:id="txtProductID" layoutX="259.0" layoutY="57.0" prefHeight="25.0" prefWidth="205.0" promptText="Product ID" />
-                        <JFXButton buttonType="RAISED" layoutX="683.0" layoutY="336.0" onAction="#btnOnActionProductAdd" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                        <JFXTextField fx:id="txtProductID" layoutX="259.0" layoutY="57.0" onAction="#inputOnActionProductListing" prefHeight="25.0" prefWidth="205.0" promptText="Enter Product ID" />
+                        <JFXButton fx:id="btnAdd" buttonType="RAISED" disable="true" layoutX="683.0" layoutY="336.0" onAction="#btnOnActionProductAddCart" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -192,7 +192,7 @@
                            </image>
                         </ImageView>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="279.0" layoutX="234.0" layoutY="402.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="666.0" />
-                        <JFXButton buttonType="RAISED" layoutX="690.0" layoutY="623.0" onAction="#btnOnActionProductAdd" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Check Availability" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="690.0" layoutY="623.0" onAction="#btnOnActionCheckAvailability" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Check Availability" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -200,9 +200,9 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXComboBox layoutX="259.0" layoutY="432.0" prefHeight="25.0" prefWidth="200.0" promptText="Product List" />
-                        <JFXComboBox layoutX="259.0" layoutY="467.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Size" />
-                        <JFXComboBox layoutX="259.0" layoutY="503.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Category" />
+                        <JFXComboBox fx:id="cmbProductList" layoutX="259.0" layoutY="432.0" prefHeight="25.0" prefWidth="200.0" promptText="Product List" />
+                        <JFXComboBox fx:id="cmbProductSize" layoutX="259.0" layoutY="467.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Size" />
+                        <JFXComboBox fx:id="cmbProductCategory" layoutX="259.0" layoutY="503.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Category" />
                         <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="47.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Billing" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />

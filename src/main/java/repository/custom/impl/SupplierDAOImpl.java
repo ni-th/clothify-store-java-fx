@@ -40,7 +40,6 @@ public class SupplierDAOImpl implements SupplierDAO {
     public List<SupplierEntity> getAll() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
         Query<SupplierEntity> fromSupplier = session.createQuery("FROM SupplierEntity", SupplierEntity.class);
         fromSupplier.getResultList();
         return fromSupplier.getResultList();

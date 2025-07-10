@@ -1,6 +1,7 @@
 package repository.custom.impl;
 
 import model.dto.ProductDTO;
+import model.entity.EmployeeEntity;
 import model.entity.ProductEntity;
 import model.entity.SupplierEntity;
 import org.hibernate.Session;
@@ -35,8 +36,12 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public ProductEntity searchById(Integer s) {
-        return null;
+    public ProductEntity searchById(Integer id) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        ProductEntity productEntity = session.get(ProductEntity.class, id);
+        session.getTransaction().commit();
+        return productEntity;
     }
 
     @Override
