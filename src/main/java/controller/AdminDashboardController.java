@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable {
-    public JFXPasswordField txtAdminPassword1;
-    public JFXPasswordField txtAdminPassword2;
+    private JFXPasswordField txtAdminPassword1;
+    private JFXPasswordField txtAdminPassword2;
 
     public Label lblID;
     public Label lblEmail;

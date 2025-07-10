@@ -52,7 +52,7 @@ public class AdminLoginController implements Initializable {
             return;
         }
         EmployeeDTO employeeDTO = employeeService.loginUser(txtEmail.getText(), txtPassword.getText());
-        if (!employeeDTO.getUser_type().equals("super-admin")){
+        if (!employeeDTO.getUser_type().equals("super-admin") || !employeeDTO.getUser_type().equals("admin")){
             showAlert("You are not an Admin");
             return;
         }

@@ -49,9 +49,10 @@ public class CashierController implements Initializable {
     public JFXComboBox cmbProductSize;
     public JFXComboBox cmbProductCategory;
     public JFXButton btnAdd;
+    public Label lblTotal;
 
 
-//    Button btn = new Button("Hello");
+    //    Button btn = new Button("Hello");
 //    Label lbl = new Label("Lable");
 //    Image img = new Image("https://www.nolimit.lk/_next/image?url=https%3A%2F%2Fcdn.greencloudpos.com%2Fnolimit.lk%2Fproduct%2FHUF%26DEEWomen%27sNotchNeckT-ShirtDarkTeal-2-1747807169093-DSC07147.jpg%3Fwidth%3D600&w=750&q=75");
 //

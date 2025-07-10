@@ -212,6 +212,16 @@
                            </cursor>
                         </JFXButton>
                         <Line endX="45.0" layoutX="132.0" layoutY="113.0" startX="-111.0" />
+                        <Label layoutX="1097.0" layoutY="561.0" text="Total :">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblTotal" layoutX="1157.0" layoutY="561.0" text="--------------">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
