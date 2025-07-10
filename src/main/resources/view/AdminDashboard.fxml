@@ -93,7 +93,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <JFXTextField fx:id="txtEmpID" layoutX="21.0" layoutY="38.0" prefHeight="25.0" prefWidth="213.0" promptText="ID" />
+                                    <JFXTextField fx:id="txtEmpID" disable="true" layoutX="21.0" layoutY="38.0" prefHeight="25.0" prefWidth="213.0" promptText="ID" />
                                     <JFXComboBox fx:id="cmbEmployeeType" layoutX="21.0" layoutY="179.0" prefHeight="25.0" prefWidth="213.0" promptText="Employee Type" visibleRowCount="5" />
                                     <JFXTextField fx:id="txtEmpName" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="213.0" promptText="Name" />
                                     <JFXTextField fx:id="txtEmpEmail" layoutX="21.0" layoutY="145.0" prefHeight="25.0" prefWidth="213.0" promptText="Email" />

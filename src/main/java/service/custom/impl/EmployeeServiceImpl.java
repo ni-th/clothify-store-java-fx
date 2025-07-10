@@ -5,13 +5,9 @@ import model.entity.EmployeeEntity;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
-import repository.custom.impl.EmployeeDAOImpl;
 import service.custom.EmployeeService;
-import util.CRUDUtil;
 import util.RepositoryType;
-import util.ServiceType;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +44,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Boolean add(EmployeeDTO employee) {
         EmployeeEntity mapped = new ModelMapper().map(employee, EmployeeEntity.class);
         return employeeDAO.add(mapped);
+    }
+
+    @Override
+    public EmployeeEntity searchByUserName(String username) throws SQLException {
+        return employeeDAO.searchByUserName(username);
     }
 }

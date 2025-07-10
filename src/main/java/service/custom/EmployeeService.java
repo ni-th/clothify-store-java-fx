@@ -19,4 +19,5 @@ public interface EmployeeService extends SuperService {
     List<EmployeeDTO> getAll();
 
     Boolean add(EmployeeDTO employee);
+    EmployeeEntity searchByUserName(String username) throws SQLException;
 }

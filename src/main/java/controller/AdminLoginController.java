@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.dto.EmployeeDTO;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
 import service.custom.UserService;
@@ -48,6 +49,11 @@ public class AdminLoginController implements Initializable {
         }
         if (employeeService.loginUser(txtEmail.getText(), txtPassword.getText())==null){
             showAlert("Admin not Existed!");
+            return;
+        }
+        EmployeeDTO employeeDTO = employeeService.loginUser(txtEmail.getText(), txtPassword.getText());
+        if (!employeeDTO.getUser_type().equals("super-admin")){
+            showAlert("You are not an Admin");
             return;
         }
         SessionManager.getInstance().setUser(employeeService.loginUser(txtEmail.getText(), txtPassword.getText()));

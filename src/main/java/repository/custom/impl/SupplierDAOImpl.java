@@ -1,5 +1,6 @@
 package repository.custom.impl;
 
+import model.entity.EmployeeEntity;
 import model.entity.SupplierEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -43,5 +44,16 @@ public class SupplierDAOImpl implements SupplierDAO {
         Query<SupplierEntity> fromSupplier = session.createQuery("FROM SupplierEntity", SupplierEntity.class);
         fromSupplier.getResultList();
         return fromSupplier.getResultList();
+    }
+
+    @Override
+    public SupplierEntity searchByUserName(String username) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        SupplierEntity supplier = session.createQuery("FROM SupplierEntity WHERE email = :email", SupplierEntity.class)
+                .setParameter("email", username)
+                .uniqueResult();
+        session.getTransaction().commit();
+        return supplier;
     }
 }

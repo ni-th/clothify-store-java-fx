@@ -22,6 +22,7 @@ import util.ServiceType;
 import util.SessionManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -139,8 +140,8 @@ public class AdminDashboardController implements Initializable {
 
     }
 
-    public void btnOnActionAddEmployee(ActionEvent actionEvent) {
-        if (txtEmpID.getText().isEmpty() || txtEmpName.getText().isEmpty() ||txtEmpPassword.getText().isEmpty() || txtEmpEmail.getText().isEmpty() || cmbEmployeeType.getValue().toString().isEmpty()){
+    public void btnOnActionAddEmployee(ActionEvent actionEvent) throws SQLException {
+        if (txtEmpName.getText().isEmpty() ||txtEmpPassword.getText().isEmpty() || txtEmpEmail.getText().isEmpty() || cmbEmployeeType.getValue().toString().isEmpty()){
             showErrorAlert("Field is required");
             return;
         }
@@ -150,7 +151,11 @@ public class AdminDashboardController implements Initializable {
         String txtEmpEmailText = txtEmpEmail.getText();
         String cmbEmployeeTypeValue = cmbEmployeeType.getValue().toString();
 
-        Boolean added = employeeService.add(new EmployeeDTO(Integer.parseInt(txtEmpIDText), txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
+        if (employeeService.searchByUserName(txtEmpEmailText) != null){
+            showInfoAlert("Email Exist!");
+            return;
+        }
+        Boolean added = employeeService.add(new EmployeeDTO(null, txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
         if (added){
             showInfoAlert("Employee Added Successfully");
         }else{
@@ -159,9 +164,13 @@ public class AdminDashboardController implements Initializable {
 
     }
 
-    public void btnOnActionAddSuplier(ActionEvent actionEvent) {
+    public void btnOnActionAddSuplier(ActionEvent actionEvent) throws SQLException {
         if (txtSuplierName.getText().isEmpty() ||txtSuplierCompany.getText().isEmpty() || txtSuplierEmail.getText().isEmpty()){
             showErrorAlert("Field is required");
+            return;
+        }
+        if (supplierService.searchByUserName(txtSuplierEmail.getText()) != null){
+            showInfoAlert("Email Exist!");
             return;
         }
         String txtSuplierIDText = txtSuplierID.getText();

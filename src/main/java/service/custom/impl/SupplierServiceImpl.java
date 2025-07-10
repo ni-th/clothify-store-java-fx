@@ -10,6 +10,7 @@ import repository.custom.SupplierDAO;
 import service.custom.SupplierService;
 import util.RepositoryType;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class SupplierServiceImpl implements SupplierService {
             supplierDTOList.add(new ModelMapper().map(supplier, SupplierDTO.class));
         });
         return supplierDTOList;
+    }
+
+    @Override
+    public SupplierEntity searchByUserName(String username) throws SQLException {
+        return supplierDAO.searchByUserName(username);
     }
 }
