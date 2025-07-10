@@ -108,7 +108,7 @@ public class AdminDashboardController implements Initializable {
 
     private void setAdminDetails(){
         EmployeeDTO user = SessionManager.getInstance().getUser();
-        lblID.setText(user.getId());
+        lblID.setText(user.getId().toString());
         lblEmail.setText(user.getEmail());
         lblName.setText(user.getName());
     }
@@ -132,8 +132,8 @@ public class AdminDashboardController implements Initializable {
     private List<String> getAllSuppliers(){
         List<SupplierDTO> all = supplierService.getAll();
         List<String> supplierIDList = new ArrayList<>();
-        all.forEach(name ->{
-            supplierIDList.add(name.getId());
+        all.forEach(supplier ->{
+            supplierIDList.add(supplier.getId().toString());
         });
         return supplierIDList;
 
@@ -150,7 +150,7 @@ public class AdminDashboardController implements Initializable {
         String txtEmpEmailText = txtEmpEmail.getText();
         String cmbEmployeeTypeValue = cmbEmployeeType.getValue().toString();
 
-        Boolean added = employeeService.add(new EmployeeDTO(txtEmpIDText, txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
+        Boolean added = employeeService.add(new EmployeeDTO(Integer.parseInt(txtEmpIDText), txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
         if (added){
             showInfoAlert("Employee Added Successfully");
         }else{
@@ -169,7 +169,7 @@ public class AdminDashboardController implements Initializable {
         String txtSuplierCompanyText = txtSuplierCompany.getText();
         String txtSuplierEmailText = txtSuplierEmail.getText();
 
-        Boolean added = supplierService.add(new SupplierDTO(txtSuplierIDText, txtSuplierNameText, txtSuplierCompanyText, txtSuplierEmailText));
+        Boolean added = supplierService.add(new SupplierDTO(Integer.parseInt(txtSuplierIDText), txtSuplierNameText, txtSuplierCompanyText, txtSuplierEmailText));
         if (added){
             showInfoAlert("Supplier Added Successfully");
         }else{
@@ -210,7 +210,8 @@ public class AdminDashboardController implements Initializable {
             return;
         }
         Boolean isAdded = productService.add(new ProductDTO(
-                txtProductIDText,
+                null,
+                null,
                 txtProductNameText,
                 txtCategory,
                 txtProductColorText,

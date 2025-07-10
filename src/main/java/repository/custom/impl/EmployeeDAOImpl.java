@@ -31,15 +31,27 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean deleteById(String s) {
+    public boolean deleteById(Integer s) {
         return false;
     }
 
     @Override
-    public EmployeeEntity searchById(String s) throws SQLException {
+    public EmployeeEntity searchById(Integer s) throws SQLException {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         EmployeeEntity employee = session.get(EmployeeEntity.class,s);
+        session.getTransaction().commit();
+        return employee;
+    }
+
+    @Override
+    public EmployeeEntity searchByUserName(String username) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        EmployeeEntity employee = session.createQuery("FROM EmployeeEntity WHERE email = :email", EmployeeEntity.class)
+                .setParameter("email", username)
+                .uniqueResult();
+//        EmployeeEntity employee = session.get(EmployeeEntity.class,username);
         session.getTransaction().commit();
         return employee;
     }

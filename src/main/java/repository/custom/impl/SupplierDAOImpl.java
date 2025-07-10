@@ -27,12 +27,12 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public boolean deleteById(String s) {
+    public boolean deleteById(Integer s) {
         return false;
     }
 
     @Override
-    public SupplierEntity searchById(String s) throws SQLException {
+    public SupplierEntity searchById(Integer s) throws SQLException {
         return null;
     }
 

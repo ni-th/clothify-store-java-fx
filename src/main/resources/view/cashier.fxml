@@ -12,8 +12,10 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -59,9 +61,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <HBox layoutX="97.0" layoutY="346.0" prefHeight="100.0" prefWidth="200.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b7fff" height="694.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
-                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="69.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Ladies" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="136.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Ladies" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -69,7 +70,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="136.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Gents" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="203.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Gents" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -77,7 +78,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="203.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Kids" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="270.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Kids" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -85,7 +86,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="270.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Other" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="337.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Other" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -94,12 +95,12 @@
                            </cursor>
                         </JFXButton>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b7fff" height="694.0" layoutX="913.0" stroke="BLACK" strokeType="INSIDE" width="367.0" />
-                        <TableView layoutX="914.0" layoutY="62.0" prefHeight="479.0" prefWidth="365.0">
+                        <TableView fx:id="tblCart" layoutX="914.0" layoutY="62.0" prefHeight="479.0" prefWidth="365.0">
                           <columns>
-                            <TableColumn prefWidth="152.0" text="Item Name" />
-                            <TableColumn prefWidth="68.0" text="Item Code" />
-                              <TableColumn prefWidth="41.0" text="qty" />
-                              <TableColumn prefWidth="104.0" text="total" />
+                            <TableColumn fx:id="colItemName" prefWidth="152.0" text="Item Name" />
+                            <TableColumn fx:id="colItemCode" prefWidth="68.0" text="Item Code" />
+                              <TableColumn fx:id="colQty" prefWidth="41.0" text="qty" />
+                              <TableColumn fx:id="colTotal" prefWidth="104.0" text="total" />
                           </columns>
                         </TableView>
                         <Label layoutX="923.0" layoutY="27.0" text="Cart">
@@ -115,6 +116,102 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="366.0" layoutX="234.0" layoutY="20.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="666.0" />
+                        <JFXTextField fx:id="txtProductID" layoutX="259.0" layoutY="57.0" prefHeight="25.0" prefWidth="205.0" promptText="Product ID" />
+                        <JFXButton buttonType="RAISED" layoutX="683.0" layoutY="336.0" onAction="#btnOnActionProductAdd" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <Label alignment="CENTER" layoutX="259.0" layoutY="96.0" text="Name : ">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblName" alignment="CENTER" layoutX="341.0" layoutY="96.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="260.0" layoutY="121.0" text="Stock : ">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblStock" alignment="CENTER" layoutX="342.0" layoutY="121.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="260.0" layoutY="146.0" text="Catagory : ">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblCategory" alignment="CENTER" layoutX="342.0" layoutY="146.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="260.0" layoutY="171.0" text="Size :">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblSize" alignment="CENTER" layoutX="342.0" layoutY="171.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="260.0" layoutY="196.0" text="Color :">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblColor" alignment="CENTER" layoutX="342.0" layoutY="196.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="260.0" layoutY="221.0" text="Price :">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblPrice" alignment="CENTER" layoutX="342.0" layoutY="221.0" text="---------------------">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="640.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/1.png" />
+                           </image>
+                        </ImageView>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="279.0" layoutX="234.0" layoutY="402.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="666.0" />
+                        <JFXButton buttonType="RAISED" layoutX="690.0" layoutY="623.0" onAction="#btnOnActionProductAdd" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: gray;" text="Check Availability" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXComboBox layoutX="259.0" layoutY="432.0" prefHeight="25.0" prefWidth="200.0" promptText="Product List" />
+                        <JFXComboBox layoutX="259.0" layoutY="467.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Size" />
+                        <JFXComboBox layoutX="259.0" layoutY="503.0" prefHeight="25.0" prefWidth="200.0" promptText="Product Category" />
+                        <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="47.0" prefHeight="37.0" prefWidth="169.0" style="-fx-background-color: gray;" text="Billing" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <Line endX="45.0" layoutX="132.0" layoutY="113.0" startX="-111.0" />
                      </children>
                   </AnchorPane>
             </content>

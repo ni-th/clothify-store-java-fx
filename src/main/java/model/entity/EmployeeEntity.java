@@ -12,9 +12,10 @@ import lombok.*;
 @Table(name = "user")
 public class EmployeeEntity {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
     private String user_type;

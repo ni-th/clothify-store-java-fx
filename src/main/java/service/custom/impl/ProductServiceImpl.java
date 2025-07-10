@@ -14,6 +14,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Boolean add(ProductDTO productDTO) {
-        return productDAO.add(new ModelMapper().map(productDTO , ProductEntity.class));
+        return productDAO.add(new ModelMapper().map(productDTO, ProductEntity.class));
     }
+
 }

@@ -16,8 +16,9 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "product")
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String itemCode;
     private String name;
     private String category;
     private String color;

@@ -6,5 +6,5 @@ import service.SuperService;
 import java.sql.SQLException;
 
 public interface UserService extends SuperService {
-    EmployeeDTO loginUser(String username, String password) throws SQLException;
+    EmployeeDTO loginUser(Integer id, String password) throws SQLException;
 }

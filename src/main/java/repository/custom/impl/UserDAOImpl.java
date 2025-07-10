@@ -1,8 +1,10 @@
 package repository.custom.impl;
 
 import model.entity.EmployeeEntity;
+import org.hibernate.Session;
 import repository.custom.UserDAO;
 import util.CRUDUtil;
+import util.HibernateUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,26 +22,26 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean deleteById(String s) {
+    public boolean deleteById(Integer s) {
         return false;
     }
 
     @Override
-    public EmployeeEntity searchById(String s) throws SQLException {
-        ResultSet resultSet = CRUDUtil.execute("SELECT * FROM user WHERE email = ? AND user_type = 'ADMIN'", s);
-        if (resultSet.next())
-            return new EmployeeEntity(
-                    resultSet.getString("user_id"),
-                    resultSet.getString("user_name"),
-                    resultSet.getString("password"),
-                    resultSet.getString("email"),
-                    resultSet.getString("user_type")
-            );
-        return null;
+    public EmployeeEntity searchById(Integer s) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        EmployeeEntity employee = session.get(EmployeeEntity.class,s);
+        session.getTransaction().commit();
+        return employee;
     }
 
     @Override
     public List<EmployeeEntity> getAll() {
         return List.of();
+    }
+
+    @Override
+    public EmployeeEntity searchByUserName(String username) throws SQLException {
+        return null;
     }
 }

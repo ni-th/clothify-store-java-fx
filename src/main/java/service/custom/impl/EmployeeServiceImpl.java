@@ -20,9 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDAO employeeDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
 
     @Override
-    public EmployeeDTO loginUser(String username, String password) throws SQLException {
+    public EmployeeDTO loginUser(String id, String password) throws SQLException {
 
-        EmployeeEntity employeeEntity = employeeDAO.searchById(username);
+        EmployeeEntity employeeEntity = employeeDAO.searchByUserName(id);
         if (employeeEntity == null){
             return null;
         }

@@ -15,8 +15,8 @@ import lombok.Setter;
 @Table(name = "supplier")
 public class SupplierEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String companyName;
     private String email;
