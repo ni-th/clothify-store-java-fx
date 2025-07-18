@@ -1,5 +1,6 @@
-package model.dto;
+package model.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class CartItemDTO {
+@Entity
+@Table(name = "cart")
+public class CartItemEntity {
+
     private String name;
+    @Id
     private Integer id;
     private Integer qty;
     private Double selling_price;

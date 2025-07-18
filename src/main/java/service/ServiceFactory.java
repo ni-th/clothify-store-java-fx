@@ -1,10 +1,7 @@
 package service;
 
 import service.custom.EmployeeService;
-import service.custom.impl.EmployeeServiceImpl;
-import service.custom.impl.ProductServiceImpl;
-import service.custom.impl.SupplierServiceImpl;
-import service.custom.impl.UserServiceImpl;
+import service.custom.impl.*;
 import util.ServiceType;
 
 public class ServiceFactory {
@@ -21,6 +18,7 @@ public class ServiceFactory {
             case PRODUCT:return  (T) new ProductServiceImpl();
             case USER:return  (T) new UserServiceImpl();
             case SUPPLIER:return  (T) new SupplierServiceImpl();
+            case CARTITEM:return  (T) new CartItemServiceImpl();
         }
         return null;
     }

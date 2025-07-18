@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import service.ServiceFactory;
+import service.SuperService;
+import service.custom.CartItemService;
 import service.custom.EmployeeService;
 import service.custom.ProductService;
 import service.custom.SupplierService;
@@ -51,42 +53,32 @@ public class CashierController implements Initializable {
     public JFXButton btnAdd;
     public Label lblTotal;
 
-
-    //    Button btn = new Button("Hello");
-//    Label lbl = new Label("Lable");
-//    Image img = new Image("https://www.nolimit.lk/_next/image?url=https%3A%2F%2Fcdn.greencloudpos.com%2Fnolimit.lk%2Fproduct%2FHUF%26DEEWomen%27sNotchNeckT-ShirtDarkTeal-2-1747807169093-DSC07147.jpg%3Fwidth%3D600&w=750&q=75");
-//
-//    HBox hbox = new HBox(10);
     CartItemDTO cartItemDTO;
     ObservableList<CartItemDTO> cartItemDTOs = FXCollections.observableArrayList();
-
+    List<CartItemDTO> cartItemDTOList = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        ImageView imageView1 = new ImageView(img);
-//        imageView1.setFitHeight(100);
-//        imageView1.setPreserveRatio(true);
-//
-//        hbox.getChildren().addAll(imageView1,lbl,btn);
-//        hbox.setAlignment(Pos.CENTER);
-//        listView.getItems().add(hbox);
-//        listView.getItems().add(hbox);
 
         colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("id"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("selling_price"));
-
-
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) {
         if (cartItemDTO != null){
             cartItemDTOs.add(cartItemDTO);
+            cartItemDTOList.add(cartItemDTO);
             tblCart.setItems(cartItemDTOs);
         }
     }
 
     public void btnOnActionPurchase(ActionEvent actionEvent) {
+        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
+        cartItemDTOList.forEach(cartItemDTO1 -> {
+            cartItemService.add(cartItemDTO1);
+            return;
+        });
     }
 
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {

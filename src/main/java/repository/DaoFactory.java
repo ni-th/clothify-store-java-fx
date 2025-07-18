@@ -1,11 +1,9 @@
 package repository;
 
-import repository.custom.impl.SupplierDAOImpl;
-import repository.custom.impl.UserDAOImpl;
-import repository.custom.impl.EmployeeDAOImpl;
-import repository.custom.impl.ProductDAOImpl;
+import repository.custom.impl.*;
 import util.RepositoryType;
 
+import static util.ServiceType.CARTITEM;
 import static util.ServiceType.SUPPLIER;
 
 public class DaoFactory {
@@ -21,6 +19,7 @@ public class DaoFactory {
             case PRODUCT: return (T) new ProductDAOImpl();
             case CATEGORY: return (T) new UserDAOImpl();
             case SUPPLIER: return (T) new SupplierDAOImpl();
+            case CARTITEM: return (T) new CartItemDAOImpl();
         }
         return null;
     }
