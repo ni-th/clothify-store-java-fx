@@ -16,6 +16,7 @@ public class CartItemEntity {
 
     private String name;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer qty;
     private Double selling_price;
