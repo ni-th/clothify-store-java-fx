@@ -1,6 +1,7 @@
 package repository.custom.impl;
 
 import model.entity.CartItemEntity;
+import model.entity.EmployeeEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import repository.custom.CartItemDAO;
@@ -43,5 +44,18 @@ public class CartItemDAOImpl implements CartItemDAO {
     @Override
     public List<CartItemEntity> getAll() {
         return List.of();
+    }
+
+    @Override
+    public Integer getLastID() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        CartItemEntity cartItem = session.createNativeQuery("SELECT * FROM cart ORDER BY orderID DESC LIMIT 1", CartItemEntity.class)
+                .uniqueResult();
+        if (cartItem != null) {
+            return cartItem.getOrderID();
+        } else {
+            return null; // or return 0, -1, throw exception etc. based on your logic
+        }
     }
 }

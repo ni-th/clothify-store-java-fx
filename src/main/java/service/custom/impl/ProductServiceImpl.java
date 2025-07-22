@@ -21,6 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO searchById(Integer id) throws SQLException {
+        if (productDAO.searchById(id) == null){
+            return null;
+        }
         return new ModelMapper().map(productDAO.searchById(id), ProductDTO.class);
     }
 

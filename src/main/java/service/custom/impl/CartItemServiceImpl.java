@@ -22,4 +22,10 @@ public class CartItemServiceImpl implements CartItemService {
     public CartItemDTO searchById(Integer id) throws SQLException {
         return null;
     }
+
+    @Override
+    public Integer getLastID() {
+        CartItemDAO cartItemDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.CARTITEM);
+        return cartItemDAO.getLastID();
+    }
 }

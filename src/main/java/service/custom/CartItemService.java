@@ -9,4 +9,5 @@ import java.sql.SQLException;
 public interface CartItemService extends SuperService {
     Boolean add(CartItemDTO cartItemDTO);
     CartItemDTO searchById(Integer id) throws SQLException;
+    Integer getLastID();
 }

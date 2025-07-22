@@ -9,20 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import service.ServiceFactory;
 import service.custom.CartItemService;
-import service.custom.EmployeeService;
 import service.custom.ProductService;
-import service.custom.SupplierService;
 import util.ServiceType;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CashierController implements Initializable {
@@ -47,37 +45,98 @@ public class CashierController implements Initializable {
     public JFXComboBox cmbProductCategory;
     public JFXButton btnAdd;
     public Label lblTotal;
+    public JFXTextField txtOrderID;
+    public JFXTextField txtQty;
 
     CartItemDTO cartItemDTO;
     ObservableList<CartItemDTO> cartItemDTOObservableList = FXCollections.observableArrayList();
-    List<CartItemDTO> cartItemDTOList = new ArrayList<>();
     HashMap<Integer,Integer> cartItemMap = new HashMap<>();
     Double totalCost;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("selling_price"));
+
+        setTxtOrderID();
     }
 
-    public void btnOnActionProductAddCart(ActionEvent actionEvent) {
+    public void showWarningAlert(String alertContent) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Warning");
+        alert.setContentText(alertContent);
+        alert.showAndWait();
+    }
+    public void showOnfoAlert(String alertContent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Information");
+        alert.setContentText(alertContent);
+        alert.showAndWait();
+    }
+
+    private void setTxtOrderID(){
+        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
+        Integer lastID = cartItemService.getLastID();
+        if (lastID==null){
+            lastID=1000;
+        }else {
+            lastID+=1;
+        }
+        txtOrderID.setText(lastID.toString());
+    }
+    private Boolean updateStock(Integer id) throws SQLException {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
-        if (cartItemDTO != null){
+        ProductDTO productDTO = productService.searchById(id);
+        Integer qty = productDTO.getQty();
+        Integer newQty = qty-cartItemMap.get(id);
+
+        if (newQty<0) {
+            showWarningAlert("Low Stock");
+            return false;
+        }
+        lblStock.setText(newQty.toString());
+        return true;
+    }
+    private Integer getStock(Integer id) throws SQLException {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
+        ProductDTO productDTO = productService.searchById(id);
+        Integer qty = productDTO.getQty();
+        Integer newQty = qty-cartItemMap.get(id);
+        return newQty;
+
+    }
+
+    public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
+
+        if (txtQty.getText().isEmpty()){
+            showWarningAlert("Qty is Empty");
+            return;
+        }
             cartItemDTOObservableList.clear();
             totalCost=0.0;
-            if (cartItemMap.containsKey(cartItemDTO.getId())){
-                Integer newQty = cartItemMap.get(cartItemDTO.getId()) + 1;
-                cartItemMap.put(cartItemDTO.getId(), newQty);
+            if (cartItemMap.containsKey(Integer.parseInt(txtProductID.getText()))){
+                if (getStock(Integer.parseInt(txtProductID.getText())) < Integer.parseInt(txtQty.getText())) {
+                    showWarningAlert("Low Stock");
+                }else{
+                    Integer newQty = cartItemMap.get(Integer.parseInt(txtProductID.getText())) + Integer.parseInt(txtQty.getText());
+                    cartItemMap.put(Integer.parseInt(txtProductID.getText()), newQty);
+                    updateStock(Integer.parseInt(txtProductID.getText()));
+                }
+
             }else{
-                cartItemMap.put(cartItemDTO.getId(),cartItemDTO.getQty());
+                cartItemMap.put(Integer.parseInt(txtProductID.getText()),Integer.parseInt(txtQty.getText()));
+                updateStock(Integer.parseInt(txtProductID.getText()));
             }
 
+            //copy to observable array
             cartItemMap.forEach((productID,productQty) ->{
                 try {
                     ProductDTO productDTO = productService.searchById(productID);
                     cartItemDTOObservableList.add(new CartItemDTO(
+                            Integer.parseInt(txtOrderID.getText()),
                             productDTO.getName(),
                             productID,
                             productQty,
@@ -88,30 +147,46 @@ public class CashierController implements Initializable {
                     throw new RuntimeException(e);
                 }
             });
+
             tblCart.setItems(cartItemDTOObservableList);
             lblTotal.setText(totalCost.toString());
 
-        }
     }
 
     public void btnOnActionPurchase(ActionEvent actionEvent) {
         CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
-        cartItemDTOList.forEach(cartItemDTO1 -> {
-            cartItemService.add(cartItemDTO1);
-            return;
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
+        cartItemMap.forEach((productID,qty) -> {
+            try {
+                ProductDTO productDTO = productService.searchById(productID);
+                cartItemService.add(new CartItemDTO(Integer.parseInt(txtOrderID.getText()), productDTO.getName(), productDTO.getId(), productDTO.getQty(), productDTO.getSelling_price()));
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
+        showOnfoAlert("Purchased :) ");
     }
 
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
     }
 
-    public void inputOnActionProductListing(ActionEvent actionEvent) throws SQLException {
-        EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
-        SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
+    private void loadProductDetails() throws SQLException {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         String txtProductIDText = txtProductID.getText();
         ProductDTO productDTO = productService.searchById(Integer.parseInt(txtProductIDText));
+        if (productDTO == null){
+            lblName.setText("---------------------");
+            lblStock.setText("---------------------");
+            lblCategory.setText("---------------------");
+            lblSize.setText("---------------------");
+            lblColor.setText("---------------------");
+            lblPrice.setText("---------------------");
+            btnAdd.setDisable(false);
+            txtQty.setDisable(false);
+            return;
+        }
         lblName.setText(productDTO.getName());
         lblStock.setText(productDTO.getQty().toString());
         lblCategory.setText(productDTO.getCategory());
@@ -119,15 +194,28 @@ public class CashierController implements Initializable {
         lblColor.setText(productDTO.getColor());
         lblPrice.setText(productDTO.getSelling_price().toString());
         btnAdd.setDisable(false);
+        txtQty.setDisable(false);
 
-        cartItemDTO = new CartItemDTO(
-                productDTO.getName(),
-                productDTO.getId(),
-                1,
-                productDTO.getSelling_price()
-        );
+    }
 
+    public void OnKeyRelesed(KeyEvent keyEvent) throws SQLException {
+        loadProductDetails();
+    }
 
+    public void btnOnActionClear(ActionEvent actionEvent) {
+
+        cartItemMap.clear();
+        lblName.setText("---------------------");
+        lblStock.setText("---------------------");
+        lblCategory.setText("---------------------");
+        lblSize.setText("---------------------");
+        lblColor.setText("---------------------");
+        lblPrice.setText("---------------------");
+        btnAdd.setDisable(false);
+        txtQty.setDisable(false);
+        txtProductID.clear();
+        txtQty.clear();
+        showWarningAlert("Inputs Cleared");
 
     }
 }

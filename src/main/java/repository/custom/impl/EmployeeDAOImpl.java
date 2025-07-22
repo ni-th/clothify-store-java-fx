@@ -60,4 +60,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Session session = HibernateUtil.getSession();
         return session.createQuery("FROM EmployeeEntity", EmployeeEntity.class).getResultList();
     }
+
+    @Override
+    public Integer getLastID() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        EmployeeEntity employee = session.createQuery("SELECT * FROM product ORDER BY id DESC LIMIT 1", EmployeeEntity.class)
+                .uniqueResult();
+        return employee.getId();
+    }
 }

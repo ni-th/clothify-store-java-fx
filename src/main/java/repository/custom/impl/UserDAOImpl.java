@@ -41,6 +41,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public Integer getLastID() {
+        return 0;
+    }
+
+    @Override
     public EmployeeEntity searchByUserName(String username) throws SQLException {
         return null;
     }

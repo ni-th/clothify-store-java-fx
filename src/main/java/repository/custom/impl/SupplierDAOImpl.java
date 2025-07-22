@@ -47,6 +47,11 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
+    public Integer getLastID() {
+        return 0;
+    }
+
+    @Override
     public SupplierEntity searchByUserName(String username) throws SQLException {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();

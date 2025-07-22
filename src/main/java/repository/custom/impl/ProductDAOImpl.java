@@ -53,4 +53,9 @@ public class ProductDAOImpl implements ProductDAO {
         fromProduct.getResultList();
         return fromProduct.getResultList();
     }
+
+    @Override
+    public Integer getLastID() {
+        return 0;
+    }
 }

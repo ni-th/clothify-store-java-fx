@@ -9,4 +9,5 @@ public interface CrudRepository<T,ID> extends SuperRepository{
     boolean deleteById(ID id);
     T searchById(ID id) throws SQLException;
     List<T> getAll();
+    Integer getLastID();
 }
