@@ -43,7 +43,8 @@ public class CartItemDAOImpl implements CartItemDAO {
 
     @Override
     public List<CartItemEntity> getAll() {
-        return List.of();
+        Session session = HibernateUtil.getSession();
+        return session.createQuery("FROM CartItemEntity", CartItemEntity.class).getResultList();
     }
 
     @Override
@@ -55,7 +56,7 @@ public class CartItemDAOImpl implements CartItemDAO {
         if (cartItem != null) {
             return cartItem.getOrderID();
         } else {
-            return null; // or return 0, -1, throw exception etc. based on your logic
+            return null;
         }
     }
 }

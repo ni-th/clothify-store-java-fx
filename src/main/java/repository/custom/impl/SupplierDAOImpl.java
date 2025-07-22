@@ -1,5 +1,6 @@
 package repository.custom.impl;
 
+import model.entity.CartItemEntity;
 import model.entity.EmployeeEntity;
 import model.entity.SupplierEntity;
 import org.hibernate.Session;
@@ -48,7 +49,15 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public Integer getLastID() {
-        return 0;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        SupplierEntity supplier = session.createNativeQuery("SELECT * FROM supplier ORDER BY id DESC LIMIT 1", SupplierEntity.class)
+                .uniqueResult();
+        if (supplier != null) {
+            return supplier.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
