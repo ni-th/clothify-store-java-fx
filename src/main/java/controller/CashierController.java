@@ -7,17 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import service.ServiceFactory;
-import service.SuperService;
 import service.custom.CartItemService;
 import service.custom.EmployeeService;
 import service.custom.ProductService;
@@ -27,6 +21,7 @@ import util.ServiceType;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,8 +49,10 @@ public class CashierController implements Initializable {
     public Label lblTotal;
 
     CartItemDTO cartItemDTO;
-    ObservableList<CartItemDTO> cartItemDTOs = FXCollections.observableArrayList();
+    ObservableList<CartItemDTO> cartItemDTOObservableList = FXCollections.observableArrayList();
     List<CartItemDTO> cartItemDTOList = new ArrayList<>();
+    HashMap<Integer,Integer> cartItemMap = new HashMap<>();
+    Double totalCost;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -66,10 +63,34 @@ public class CashierController implements Initializable {
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         if (cartItemDTO != null){
-            cartItemDTOs.add(cartItemDTO);
-            cartItemDTOList.add(cartItemDTO);
-            tblCart.setItems(cartItemDTOs);
+            cartItemDTOObservableList.clear();
+            totalCost=0.0;
+            if (cartItemMap.containsKey(cartItemDTO.getId())){
+                Integer newQty = cartItemMap.get(cartItemDTO.getId()) + 1;
+                cartItemMap.put(cartItemDTO.getId(), newQty);
+            }else{
+                cartItemMap.put(cartItemDTO.getId(),cartItemDTO.getQty());
+            }
+
+            cartItemMap.forEach((productID,productQty) ->{
+                try {
+                    ProductDTO productDTO = productService.searchById(productID);
+                    cartItemDTOObservableList.add(new CartItemDTO(
+                            productDTO.getName(),
+                            productID,
+                            productQty,
+                            productDTO.getSelling_price()
+                    ));
+                    totalCost+=productDTO.getSelling_price()*productQty;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            tblCart.setItems(cartItemDTOObservableList);
+            lblTotal.setText(totalCost.toString());
+
         }
     }
 
