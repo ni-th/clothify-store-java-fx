@@ -24,6 +24,7 @@ public class CartItemEntity {
     private Integer rowcount;
     @UpdateTimestamp
     private LocalDateTime dateTime;
+    private Integer cashier;
     private Integer OrderID;
     private String name;
     private Integer productID;

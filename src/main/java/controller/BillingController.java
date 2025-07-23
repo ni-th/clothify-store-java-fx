@@ -18,6 +18,7 @@ import service.ServiceFactory;
 import service.custom.CartItemService;
 import service.custom.ProductService;
 import util.ServiceType;
+import util.SessionManager;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -56,6 +57,7 @@ public class BillingController implements Initializable {
     HashMap<Integer,Integer> cartItemQtyMap = new HashMap<>();
     Double totalCost;
     CartItemService cartItemService;
+    ProductService productService;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -64,12 +66,13 @@ public class BillingController implements Initializable {
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("selling_price"));
         cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
+        productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         setTxtOrderID();
         loadCartItemQtyMap();
     }
     private void loadCartItemQtyMap(){
-        for (CartItemDTO itemDTO : cartItemService.getAll()) {
-            cartItemQtyMap.put(itemDTO.getProductID(),itemDTO.getQty());
+        for (ProductDTO itemDTO : productService.getAll()) {
+            cartItemQtyMap.put(itemDTO.getId(),itemDTO.getQty());
         }
 
     }
@@ -99,9 +102,7 @@ public class BillingController implements Initializable {
     private Boolean updateStock(Integer id) throws SQLException {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         ProductDTO productDTO = productService.searchById(id);
-//        Integer qty = productDTO.getQty();
         Integer qty = cartItemQtyMap.get(id);
-//        int newQty = qty-cartItemMap.get(id);
         int newQty = qty-Integer.parseInt(txtQty.getText());
         cartItemQtyMap.put(id,newQty);
         if (newQty<0) {
@@ -150,6 +151,7 @@ public class BillingController implements Initializable {
                     ProductDTO productDTO = productService.searchById(productID);
                     cartItemDTOObservableList.add(new CartItemDTO(
                             Integer.parseInt(txtOrderID.getText()),
+                            SessionManager.getInstance().getUser().getId(),
                             productDTO.getName(),
                             productID,
                             productQty,
@@ -172,7 +174,7 @@ public class BillingController implements Initializable {
         cartItemMap.forEach((productID,qty) -> {
             try {
                 ProductDTO productDTO = productService.searchById(productID);
-                cartItemService.add(new CartItemDTO(Integer.parseInt(txtOrderID.getText()), productDTO.getName(), productDTO.getId(), productDTO.getQty(), productDTO.getSelling_price()));
+                cartItemService.add(new CartItemDTO(Integer.parseInt(txtOrderID.getText()),SessionManager.getInstance().getUser().getId(), productDTO.getName(), productDTO.getId(), qty, productDTO.getSelling_price()));
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
