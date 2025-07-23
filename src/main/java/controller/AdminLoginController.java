@@ -7,11 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.dto.EmployeeDTO;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
-import service.custom.UserService;
 import util.ServiceType;
 import util.SessionManager;
 
@@ -27,10 +27,10 @@ public class AdminLoginController implements Initializable {
 
     EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
 
-
+    private static Stage stage;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+         stage = new Stage();
     }
     private void showAlert(String alert){
         new Alert(Alert.AlertType.ERROR, alert).show();
@@ -40,6 +40,10 @@ public class AdminLoginController implements Initializable {
             return (Boolean) true;
         }
         return (Boolean) false;
+    }
+    static public void logout(){
+        SessionManager.getInstance().logout();
+        stage.close();
     }
     public void btnOnActionLogin(ActionEvent actionEvent) throws IOException, SQLException {
 
@@ -58,9 +62,13 @@ public class AdminLoginController implements Initializable {
         }
         SessionManager.getInstance().setUser(employeeService.loginUser(txtEmail.getText(), txtPassword.getText()));
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashboard.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminMain.fxml"))));
+        stage.setTitle("Admin Dashboard");
+        stage.getIcons().add(new Image(getClass().getResource("/images/ico.png").toExternalForm()));
         stage.show();
+
+
+
     }
 
 }

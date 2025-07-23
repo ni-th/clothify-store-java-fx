@@ -8,31 +8,28 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminLoginController">
    <children>
-      <ImageView fitHeight="311.0" fitWidth="265.0" layoutX="14.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="400.0" layoutX="335.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="265.0" />
+      <ImageView fitHeight="311.0" fitWidth="265.0" layoutX="54.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/1.png" />
          </image>
       </ImageView>
-      <JFXPasswordField fx:id="txtPassword" layoutX="324.0" layoutY="209.0" promptText="password">
+      <JFXPasswordField fx:id="txtPassword" layoutX="389.0" layoutY="176.0" promptText="password">
          <font>
             <Font size="14.0" />
          </font>
       </JFXPasswordField>
-      <JFXTextField fx:id="txtEmail" layoutX="324.0" layoutY="161.0" promptText="email">
+      <JFXTextField fx:id="txtEmail" layoutX="389.0" layoutY="128.0" promptText="email">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="191.0" layoutY="27.0" text="Admin Login">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <JFXButton buttonType="RAISED" layoutX="391.0" layoutY="269.0" onAction="#btnOnActionLogin" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Log in" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="389.0" layoutY="236.0" onAction="#btnOnActionLogin" prefHeight="37.0" prefWidth="157.0" style="-fx-background-color: #322986;" text="Log in" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -40,5 +37,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="111.0" layoutY="38.0" text="Admin Login">
+         <font>
+            <Font name="Berlin Sans FB" size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

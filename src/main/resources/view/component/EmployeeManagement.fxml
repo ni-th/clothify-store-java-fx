@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="665.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CashierController">
+   <children>
+      <Pane layoutX="23.0" layoutY="21.0" prefHeight="281.0" prefWidth="254.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="282.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="254.0" />
+            <JFXPasswordField fx:id="txtEmpPassword" layoutX="21.0" layoutY="110.0" prefHeight="25.0" prefWidth="213.0" promptText="Temporary Password" />
+            <Label layoutX="35.0" layoutY="8.0" text="Employee Regsitration">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="144.0" layoutY="224.0" onAction="#btnOnActionAddEmployee" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #523dee;" text="Add" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXTextField fx:id="txtEmpID" disable="true" layoutX="21.0" layoutY="38.0" prefHeight="25.0" prefWidth="213.0" promptText="ID" />
+            <JFXComboBox fx:id="cmbEmployeeType" layoutX="21.0" layoutY="179.0" prefHeight="25.0" prefWidth="213.0" promptText="Employee Type" visibleRowCount="5" />
+            <JFXTextField fx:id="txtEmpName" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="213.0" promptText="Name" />
+            <JFXTextField fx:id="txtEmpEmail" layoutX="21.0" layoutY="145.0" prefHeight="25.0" prefWidth="213.0" promptText="Email" />
+         </children>
+      </Pane>
+      <Pane layoutX="308.0" layoutY="21.0" prefHeight="259.0" prefWidth="255.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="259.0" layoutX="1.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="254.0" />
+            <Label layoutX="30.0" layoutY="12.0" text="Suplier Regsitration">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="145.0" layoutY="201.0" onAction="#btnOnActionAddSuplier" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #523dee;" text="Add" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXTextField fx:id="txtSuplierName" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="220.0" promptText="Name of the Suplier" />
+            <JFXTextField fx:id="txtSuplierCompany" layoutX="15.0" layoutY="116.0" prefHeight="25.0" prefWidth="220.0" promptText="Company Name" />
+            <JFXTextField fx:id="txtSuplierEmail" layoutX="15.0" layoutY="156.0" prefHeight="25.0" prefWidth="225.0" promptText="Email" />
+            <JFXTextField fx:id="txtSuplierID" disable="true" layoutX="15.0" layoutY="44.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
+         </children>
+      </Pane>
+      <Pane layoutX="595.0" layoutY="21.0" prefHeight="259.0" prefWidth="255.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="259.0" layoutY="1.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="254.0" />
+            <Label layoutX="29.0" layoutY="13.0" text="Delete User">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" disable="true" layoutX="144.0" layoutY="202.0" onAction="#btnOnActionDeleteEmployee" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #523dee;" text="Add" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXTextField fx:id="txtEmployeeDelete" editable="false" layoutX="14.0" layoutY="45.0" prefHeight="25.0" prefWidth="221.0" promptText="ID" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

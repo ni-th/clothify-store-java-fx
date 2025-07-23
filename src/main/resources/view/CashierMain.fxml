@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CashierMainController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b7fff" height="720.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="233.0" />
+      <AnchorPane fx:id="root" layoutX="232.0" layoutY="58.0" prefHeight="659.0" prefWidth="1048.0">
+         <children>
+            <ImageView fitHeight="613.0" fitWidth="604.0" layoutX="222.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/1.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="212.0" onAction="#btnOnActionBillingFormLoad" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #523dee;" text="Billing" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="277.0" onAction="#btnOnActionProductMngFormLoad" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #523dee;" text="Product Management" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="343.0" onAction="#btnOnActionProfileFormLoad" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #523dee;" text="Profile" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="660.0" onAction="#btnOnActionLogout" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #322986;" text="Logout" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b7fff" height="53.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1280.0" />
+      <ImageView fitHeight="196.0" fitWidth="197.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="576.0" layoutY="8.0" text="Clothify POS System">
+         <font>
+            <Font name="Calibri Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="39.0" fitWidth="61.0" layoutX="1229.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/avatar.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblUserHeding" alignment="CENTER_RIGHT" layoutX="921.0" layoutY="2.0" prefHeight="23.0" prefWidth="299.0" text="user" textAlignment="JUSTIFY">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUserTypeHeding" alignment="CENTER_RIGHT" layoutX="921.0" layoutY="29.0" prefHeight="23.0" prefWidth="299.0" text="user_type" textAlignment="JUSTIFY">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

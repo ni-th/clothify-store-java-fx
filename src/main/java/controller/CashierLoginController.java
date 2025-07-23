@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
@@ -18,13 +19,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EmployeeLoginController implements Initializable {
+public class CashierLoginController implements Initializable {
     public JFXPasswordField txtPassword;
     public JFXTextField txtEmail;
 
+    private static Stage stage;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        stage = new Stage();
     }
     EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
 
@@ -36,6 +38,10 @@ public class EmployeeLoginController implements Initializable {
             return (Boolean) true;
         }
         return (Boolean) false;
+    }
+    static public void logout(){
+        SessionManager.getInstance().logout();
+        stage.close();
     }
     public void btnOnActionLogin(ActionEvent actionEvent) throws IOException, SQLException {
 
@@ -49,8 +55,9 @@ public class EmployeeLoginController implements Initializable {
         }
         SessionManager.getInstance().setUser(employeeService.loginUser(txtEmail.getText(), txtPassword.getText()));
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Cashier.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CashierMain.fxml"))));
+        stage.setTitle("Cashier Dashboard");
+        stage.getIcons().add(new Image(getClass().getResource("/images/ico.png").toExternalForm()));
         stage.show();
     }
 }

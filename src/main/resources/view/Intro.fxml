@@ -6,16 +6,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IntroController">
    <children>
-      <ImageView fitHeight="426.0" fitWidth="365.0" layoutX="118.0" layoutY="-30.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="400.0" layoutX="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="260.0" />
+      <ImageView fitHeight="346.0" fitWidth="320.0" layoutX="14.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/1.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="181.0" layoutY="341.0" onAction="#btnAdminOnAction" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: gray;" text="Super Admin" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="352.0" layoutY="210.0" onAction="#btnAdminOnAction" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: #322986;" text="Super Admin" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -23,7 +25,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="316.0" layoutY="341.0" onAction="#btnEmployeeOnAction" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Cashier" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="476.0" layoutY="210.0" onAction="#btnEmployeeOnAction" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: #322986;" text="Cashier" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -31,6 +33,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="245.0" layoutY="305.0" text="Choose User Type" />
+      <Label layoutX="398.0" layoutY="161.0" text="Choose User Type">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font></Label>
    </children>
 </AnchorPane>
