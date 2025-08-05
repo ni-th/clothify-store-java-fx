@@ -76,19 +76,21 @@ public class BillingController implements Initializable {
         }
 
     }
+//    Show Info Alert
     public void showWarningAlert(String alertContent) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Warning");
         alert.setContentText(alertContent);
         alert.showAndWait();
     }
+//    Show Info Alert
     public void showOnfoAlert(String alertContent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Information");
         alert.setContentText(alertContent);
         alert.showAndWait();
     }
-
+// Set Order ID
     private void setTxtOrderID(){
         CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
         Integer lastID = cartItemService.getLastID();
@@ -99,6 +101,7 @@ public class BillingController implements Initializable {
         }
         txtOrderID.setText(lastID.toString());
     }
+//
     private Boolean updateStock(Integer id) throws SQLException {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         ProductDTO productDTO = productService.searchById(id);
@@ -180,6 +183,8 @@ public class BillingController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
+        setTxtOrderID();//when purchase completed. update the order id
+        clear();
         showOnfoAlert("Purchased :) ");
     }
 
@@ -198,8 +203,8 @@ public class BillingController implements Initializable {
             lblSize.setText("---------------------");
             lblColor.setText("---------------------");
             lblPrice.setText("---------------------");
-            btnAdd.setDisable(false);
-            txtQty.setDisable(false);
+            btnAdd.setDisable(true);
+            txtQty.setDisable(true);
             return;
         }
         lblName.setText(productDTO.getName());
@@ -214,26 +219,26 @@ public class BillingController implements Initializable {
         txtQty.setDisable(false);
 
     }
-
+//    Product ID Key Relese Event
     public void OnKeyRelesed(KeyEvent keyEvent) throws SQLException {
         loadProductDetails();
     }
-
+     private void clear(){
+         cartItemMap.clear();
+         tblCart.getItems().clear();
+         lblName.setText("---------------------");
+         lblStock.setText("---------------------");
+         lblCategory.setText("---------------------");
+         lblSize.setText("---------------------");
+         lblColor.setText("---------------------");
+         lblPrice.setText("---------------------");
+         btnAdd.setDisable(false);
+         txtQty.setDisable(false);
+         txtProductID.clear();
+         txtQty.clear();
+         showWarningAlert("Inputs Cleared");
+     }
     public void btnOnActionClear(ActionEvent actionEvent) {
-
-        cartItemMap.clear();
-        tblCart.getItems().clear();
-        lblName.setText("---------------------");
-        lblStock.setText("---------------------");
-        lblCategory.setText("---------------------");
-        lblSize.setText("---------------------");
-        lblColor.setText("---------------------");
-        lblPrice.setText("---------------------");
-        btnAdd.setDisable(false);
-        txtQty.setDisable(false);
-        txtProductID.clear();
-        txtQty.clear();
-        showWarningAlert("Inputs Cleared");
-
+        clear();
     }
 }
