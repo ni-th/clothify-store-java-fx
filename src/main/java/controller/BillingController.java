@@ -67,9 +67,8 @@ public class BillingController implements Initializable {
         colTotal.setCellValueFactory(new PropertyValueFactory<>("selling_price"));
         cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
         productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
-        txtOrderID.setText(Integer.toString(getOrderID()));
+        setTxtOrderID();
         loadCartItemQtyMap();
-
     }
     private void loadCartItemQtyMap(){
         for (ProductDTO itemDTO : productService.getAll()) {
@@ -92,28 +91,19 @@ public class BillingController implements Initializable {
         alert.showAndWait();
     }
 // Set Order ID
-//    private void setTxtOrderID(){
-//
-//        Integer lastID = cartItemService.getLastID();
-//        if (lastID==null){
-//            lastID=1000;
-//        }else {
-//            lastID+=1;
-//        }
-//        txtOrderID.setText(lastID.toString());
-//    }
-    private Integer getOrderID(){
-
+    private void setTxtOrderID(){
+        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
         Integer lastID = cartItemService.getLastID();
         if (lastID==null){
             lastID=1000;
         }else {
             lastID+=1;
         }
-        return lastID;
+        txtOrderID.setText(lastID.toString());
     }
 //
     private Boolean updateStock(Integer id) throws SQLException {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         ProductDTO productDTO = productService.searchById(id);
         Integer qty = cartItemQtyMap.get(id);
         int newQty = qty-Integer.parseInt(txtQty.getText());
@@ -127,6 +117,7 @@ public class BillingController implements Initializable {
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         if (txtQty.getText().isEmpty()){
             showWarningAlert("Qty is Empty");
@@ -172,6 +163,8 @@ public class BillingController implements Initializable {
     }
 
     public void btnOnActionPurchase(ActionEvent actionEvent) {
+        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         cartItemMap.forEach((productID,qty) -> {
             try {
                 ProductDTO productDTO = productService.searchById(productID);
@@ -181,21 +174,19 @@ public class BillingController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-
-
+        setTxtOrderID();//when purchase completed. update the order id
         clear();
+
         showOnfoAlert("Purchased :) ");
-        cartItemService.generateReport(Integer.parseInt(txtOrderID.getText()));
-        txtOrderID.setText(Integer.toString(getOrderID()));
     }
     public void updateQty(){
 
     }
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
-        productService.generateReport();
     }
 
     private void loadProductDetails() throws SQLException {
+        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         String txtProductIDText = txtProductID.getText();
         ProductDTO productDTO = productService.searchById(Integer.parseInt(txtProductIDText));
