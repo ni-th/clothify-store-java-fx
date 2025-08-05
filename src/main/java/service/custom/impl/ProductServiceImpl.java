@@ -19,6 +19,8 @@ import util.ServiceType;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +63,8 @@ public class ProductServiceImpl implements ProductService {
             JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/product-report.jrxml");
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
-            JasperExportManager.exportReportToPdfFile(jasperPrint ,"product_report.pdf");
+            String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            JasperExportManager.exportReportToPdfFile(jasperPrint ,"reports/product_report - "+date+".pdf");
             JasperViewer.viewReport(jasperPrint,false);
         } catch (JRException e) {
             throw new RuntimeException(e);

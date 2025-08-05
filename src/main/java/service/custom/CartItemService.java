@@ -13,4 +13,5 @@ public interface CartItemService extends SuperService {
     CartItemDTO searchById(Integer id) throws SQLException;
     Integer getLastID();
     List<CartItemDTO> getAll();
+    void generateReport(Integer id);
 }
