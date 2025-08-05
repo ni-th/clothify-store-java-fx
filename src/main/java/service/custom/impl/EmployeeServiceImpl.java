@@ -1,7 +1,12 @@
 package service.custom.impl;
 
+import db.DBConnection;
 import model.dto.EmployeeDTO;
 import model.entity.EmployeeEntity;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
@@ -60,5 +65,20 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public void generateReport() {
+        try {
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/employee-report.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperExportManager.exportReportToPdfFile(jasperPrint ,"employee_report.pdf");
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

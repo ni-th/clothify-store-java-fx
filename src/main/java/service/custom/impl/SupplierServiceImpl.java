@@ -34,4 +34,9 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierEntity searchByUserName(String username) throws SQLException {
         return supplierDAO.searchByUserName(username);
     }
+
+    @Override
+    public void generateReport() {
+
+    }
 }

@@ -1,9 +1,14 @@
 package service.custom.impl;
 
+import db.DBConnection;
 import model.dto.EmployeeDTO;
 import model.dto.ProductDTO;
 import model.entity.EmployeeEntity;
 import model.entity.ProductEntity;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.ProductDAO;
@@ -12,6 +17,7 @@ import service.custom.ProductService;
 import util.RepositoryType;
 import util.ServiceType;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +53,21 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity productEntity = productDAO.searchById(id);
         Integer qtyInDB = productEntity.getQty();
         return productDAO.updateQty(id,qtyInDB-qty);
+    }
+
+    @Override
+    public void generateReport() {
+        try {
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/product-report.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperExportManager.exportReportToPdfFile(jasperPrint ,"product_report.pdf");
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

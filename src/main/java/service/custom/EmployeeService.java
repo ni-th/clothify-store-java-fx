@@ -21,4 +21,5 @@ public interface EmployeeService extends SuperService {
     Boolean add(EmployeeDTO employee);
     EmployeeEntity searchByUserName(String username) throws SQLException;
     Boolean creatAdmin();
+    void generateReport();
 }

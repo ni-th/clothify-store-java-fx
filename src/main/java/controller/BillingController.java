@@ -69,6 +69,7 @@ public class BillingController implements Initializable {
         productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         setTxtOrderID();
         loadCartItemQtyMap();
+
     }
     private void loadCartItemQtyMap(){
         for (ProductDTO itemDTO : productService.getAll()) {
@@ -92,7 +93,7 @@ public class BillingController implements Initializable {
     }
 // Set Order ID
     private void setTxtOrderID(){
-        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
+
         Integer lastID = cartItemService.getLastID();
         if (lastID==null){
             lastID=1000;
@@ -103,7 +104,6 @@ public class BillingController implements Initializable {
     }
 //
     private Boolean updateStock(Integer id) throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         ProductDTO productDTO = productService.searchById(id);
         Integer qty = cartItemQtyMap.get(id);
         int newQty = qty-Integer.parseInt(txtQty.getText());
@@ -117,7 +117,6 @@ public class BillingController implements Initializable {
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         if (txtQty.getText().isEmpty()){
             showWarningAlert("Qty is Empty");
@@ -163,8 +162,6 @@ public class BillingController implements Initializable {
     }
 
     public void btnOnActionPurchase(ActionEvent actionEvent) {
-        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         cartItemMap.forEach((productID,qty) -> {
             try {
                 ProductDTO productDTO = productService.searchById(productID);
@@ -183,10 +180,10 @@ public class BillingController implements Initializable {
 
     }
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
+        productService.generateReport();
     }
 
     private void loadProductDetails() throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         String txtProductIDText = txtProductID.getText();
         ProductDTO productDTO = productService.searchById(Integer.parseInt(txtProductIDText));

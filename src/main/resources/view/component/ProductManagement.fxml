@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -66,6 +67,20 @@
                </cursor>
             </JFXButton>
             <JFXComboBox fx:id="cmbProductSize" layoutX="46.0" layoutY="208.0" prefHeight="25.0" prefWidth="205.0" promptText="Product Size" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="71.0" layoutX="546.0" layoutY="414.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
+            <JFXButton buttonType="RAISED" layoutX="814.0" layoutY="429.0" onAction="#btnOnActionGenerateProductReport" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Generate Report" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="571.0" layoutY="437.0" text="Generate Product Report">
+               <font>
+                  <Font name="Calibri Bold" size="21.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

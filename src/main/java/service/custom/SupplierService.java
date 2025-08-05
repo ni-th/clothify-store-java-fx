@@ -12,4 +12,5 @@ public interface SupplierService extends SuperService {
     Boolean add(SupplierDTO supplierDTO);
     List<SupplierDTO> getAll();
     SupplierEntity searchByUserName(String username) throws SQLException;
+    void generateReport();
 }
