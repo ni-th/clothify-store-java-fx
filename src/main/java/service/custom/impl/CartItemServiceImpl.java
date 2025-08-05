@@ -63,7 +63,7 @@ public class CartItemServiceImpl implements CartItemService {
             HashMap<String, Object> param = new HashMap<>();
             param.put("OrderID",id);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,param,DBConnection.getInstance().getConnection());
-            JasperExportManager.exportReportToPdfFile(jasperPrint ,"bill/bill_report - "+id+".pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint ,"bills/bill_report - "+id+".pdf");
             JasperViewer.viewReport(jasperPrint,false);
         } catch (JRException e) {
             throw new RuntimeException(e);

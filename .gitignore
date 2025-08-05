@@ -38,5 +38,3 @@ build/
 .DS_Store
 
 ### Reports ###
-touch reports/.gitkeep
-touch bills/.gitkeep

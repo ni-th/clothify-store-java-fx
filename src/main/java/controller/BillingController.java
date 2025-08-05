@@ -174,10 +174,11 @@ public class BillingController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-        setTxtOrderID();//when purchase completed. update the order id
-        clear();
 
+        clear();
         showOnfoAlert("Purchased :) ");
+        cartItemService.generateReport(Integer.valueOf(txtOrderID.getText()));
+        setTxtOrderID();//when purchase completed. update the order id
     }
     public void updateQty(){
 
