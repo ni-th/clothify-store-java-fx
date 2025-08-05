@@ -7,6 +7,7 @@ import model.entity.ProductEntity;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.ProductDAO;
+import service.ServiceFactory;
 import service.custom.ProductService;
 import util.RepositoryType;
 import util.ServiceType;
@@ -47,5 +48,6 @@ public class ProductServiceImpl implements ProductService {
         Integer qtyInDB = productEntity.getQty();
         return productDAO.updateQty(id,qtyInDB-qty);
     }
+
 
 }

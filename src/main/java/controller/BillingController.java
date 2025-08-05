@@ -115,15 +115,6 @@ public class BillingController implements Initializable {
         lblStock.setText(Integer.toString(newQty));
         return true;
     }
-//    private Integer getStock(Integer id) throws SQLException {
-//        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
-//        ProductDTO productDTO = productService.searchById(id);
-//        Integer qty = cartItemQtyMap.get(id);productDTO.getQty();
-//        Integer newQty = qty-cartItemMap.get(id);
-//        int newQty = qty-Integer.parseInt(txtQty.getText());
-//        return newQty;
-//
-//    }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
@@ -249,5 +240,8 @@ public class BillingController implements Initializable {
     public void btnOnActionClear(ActionEvent actionEvent) {
         clear();
         showWarningAlert("Inputs Cleared");
+    }
+    private void generateBill(){
+
     }
 }

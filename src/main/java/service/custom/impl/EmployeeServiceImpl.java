@@ -50,4 +50,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeEntity searchByUserName(String username) throws SQLException {
         return employeeDAO.searchByUserName(username);
     }
+
+    @Override
+    public Boolean creatAdmin() {
+        EmployeeEntity employeeEntity = new EmployeeEntity(1, "admin", "admin@gmail.com", "a", "super-admin");
+        try {
+            return employeeDAO.creatAdmin(employeeEntity);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

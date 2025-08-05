@@ -69,4 +69,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 .uniqueResult();
         return employee.getId();
     }
+    @Override
+    public Boolean creatAdmin(EmployeeEntity employeeEntity) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        EmployeeEntity employeeEntity1 = searchById(1);
+        if (employeeEntity1 == null){
+            session.save(employeeEntity);
+            transaction.commit();
+            session.close();
+            return true;
+        }
+        return false;
+    }
 }

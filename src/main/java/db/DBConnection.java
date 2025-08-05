@@ -3,7 +3,7 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+//This is not used now. Instead, Hibernate is working.
 public class DBConnection {
 
     private static DBConnection instance;
