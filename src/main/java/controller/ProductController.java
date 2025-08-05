@@ -163,5 +163,7 @@ public class ProductController implements Initializable {
     }
 
 
-
+    public void btnOnActionGenerateProductReport(ActionEvent actionEvent) {
+        productService.generateReport();
+    }
 }

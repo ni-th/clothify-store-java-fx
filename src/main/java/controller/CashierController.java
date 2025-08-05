@@ -116,4 +116,7 @@ public class CashierController implements Initializable {
     public void btnOnActionDeleteEmployee(ActionEvent actionEvent) {
     }
 
+    public void btnOnActionGenerateEmployeeReport(ActionEvent actionEvent) {
+        employeeService.generateReport();
+    }
 }
