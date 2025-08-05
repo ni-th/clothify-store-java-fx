@@ -1,16 +1,12 @@
 package repository.custom.impl;
 
-import model.dto.ProductDTO;
-import model.entity.EmployeeEntity;
 import model.entity.ProductEntity;
-import model.entity.SupplierEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import repository.custom.ProductDAO;
 import util.HibernateUtil;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ProductDAOImpl implements ProductDAO {
@@ -27,6 +23,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public boolean update(ProductEntity entity) {
+
         return true;
     }
 
@@ -48,7 +45,6 @@ public class ProductDAOImpl implements ProductDAO {
     public List<ProductEntity> getAll() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
         Query<ProductEntity> fromProduct = session.createQuery("FROM ProductEntity", ProductEntity.class);
         fromProduct.getResultList();
         return fromProduct.getResultList();
@@ -57,5 +53,19 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Integer getLastID() {
         return 0;
+    }
+
+    @Override
+    public Boolean updateQty(Integer id, Integer qty) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String qry = "UPDATE ProductEntity p SET p.qty = :qty WHERE p.id = :id";
+        Query<?> query = session.createQuery(qry);
+        query.setParameter("qty", qty);
+        query.setParameter("id", id);
+        Integer i = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return true;
     }
 }

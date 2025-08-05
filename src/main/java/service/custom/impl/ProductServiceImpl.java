@@ -41,4 +41,11 @@ public class ProductServiceImpl implements ProductService {
         return  list;
     }
 
+    @Override
+    public Boolean updateQty(Integer id, Integer qty) throws SQLException {
+        ProductEntity productEntity = productDAO.searchById(id);
+        Integer qtyInDB = productEntity.getQty();
+        return productDAO.updateQty(id,qtyInDB-qty);
+    }
+
 }

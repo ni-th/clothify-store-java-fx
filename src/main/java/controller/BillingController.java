@@ -178,16 +178,19 @@ public class BillingController implements Initializable {
             try {
                 ProductDTO productDTO = productService.searchById(productID);
                 cartItemService.add(new CartItemDTO(Integer.parseInt(txtOrderID.getText()),SessionManager.getInstance().getUser().getId(), productDTO.getName(), productDTO.getId(), qty, productDTO.getSelling_price()));
-
+                productService.updateQty(productID,qty);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });
         setTxtOrderID();//when purchase completed. update the order id
         clear();
+
         showOnfoAlert("Purchased :) ");
     }
+    public void updateQty(){
 
+    }
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
     }
 
@@ -209,7 +212,12 @@ public class BillingController implements Initializable {
         }
         lblName.setText(productDTO.getName());
 //        lblStock.setText(productDTO.getQty().toString());
-        imgProduct.setImage(new Image(productDTO.getImage()));
+        if (!productDTO.getImage().isEmpty()){
+            imgProduct.setImage(new Image(productDTO.getImage()));
+        }else{
+            imgProduct.setImage(new Image("images/no-image.png"));
+        }
+
         lblStock.setText(cartItemQtyMap.get(productDTO.getId()).toString());
         lblCategory.setText(productDTO.getCategory());
         lblSize.setText(productDTO.getSize());
@@ -232,13 +240,14 @@ public class BillingController implements Initializable {
          lblSize.setText("---------------------");
          lblColor.setText("---------------------");
          lblPrice.setText("---------------------");
-         btnAdd.setDisable(false);
-         txtQty.setDisable(false);
+         btnAdd.setDisable(true);
+         txtQty.setDisable(true);
          txtProductID.clear();
          txtQty.clear();
-         showWarningAlert("Inputs Cleared");
+
      }
     public void btnOnActionClear(ActionEvent actionEvent) {
         clear();
+        showWarningAlert("Inputs Cleared");
     }
 }
