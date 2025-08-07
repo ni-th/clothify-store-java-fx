@@ -12,7 +12,7 @@ public interface EmployeeService extends SuperService {
     List<EmployeeDTO> getAll();
     Boolean add(EmployeeDTO employee);
     Boolean update(EmployeeDTO employeeDTO);
-    EmployeeEntity searchByUserName(String username) throws SQLException;
+    EmployeeDTO searchByUserName(String username) throws SQLException;
     Boolean creatAdmin();
     void generateReport();
     Integer passwordValidator(String password);
