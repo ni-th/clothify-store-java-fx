@@ -83,7 +83,35 @@ public class CashierController implements Initializable {
             showInfoAlert("Email Exist!");
             return;
         }
-        Boolean added = employeeService.add(new EmployeeDTO(null, txtEmpNameText, txtEmpEmailText, txtEmpPasswordText, cmbEmployeeTypeValue));
+
+        Integer passwordStatus = employeeService.passwordValidator(txtEmpPasswordText);
+        if (passwordStatus==1){
+            showErrorAlert("Password must be at least 8 characters long.");
+            return;
+        } else if (passwordStatus==2) {
+            showErrorAlert("Password must contain at least one uppercase letter (A–Z).");
+            return;
+        } else if (passwordStatus==3) {
+            showErrorAlert("Password must contain at least one lowercase letter (a–z).");
+            return;
+        } else if (passwordStatus==4) {
+            showErrorAlert("Password must contain at least one number (0–9).");
+            return;
+        } else if (passwordStatus==5) {
+            showErrorAlert("Password must contain at least one special character (e.g., ! @ # $ % ^ & *).");
+            return;
+        }
+
+
+        Boolean added = employeeService.add(
+                new EmployeeDTO(
+                        null,
+                        txtEmpNameText,
+                        txtEmpEmailText,
+                        employeeService.passwordEncrypter(txtEmpPasswordText),
+                        cmbEmployeeTypeValue
+                )
+        );
         if (added){
             showInfoAlert("Employee Added Successfully");
         }else{

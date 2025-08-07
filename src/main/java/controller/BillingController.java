@@ -16,7 +16,9 @@ import javafx.scene.input.KeyEvent;
 import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import service.ServiceFactory;
+import service.SuperService;
 import service.custom.CartItemService;
+import service.custom.EmployeeService;
 import service.custom.ProductService;
 import util.ServiceType;
 import util.SessionManager;
@@ -178,8 +180,14 @@ public class BillingController implements Initializable {
         cartItemService.generateReport(Integer.valueOf(txtOrderID.getText()));
         setTxtOrderID();//when purchase completed. update the order id
     }
-    public void btnOnActionCheckAvailability(ActionEvent actionEvent) throws IOException {
-
+    public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
+        EmployeeService serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+        System.out.println(serviceType.passwordValidator("sss"));
+        System.out.println(serviceType.passwordValidator("ssssssss"));
+        System.out.println(serviceType.passwordValidator("SSSSSSSS"));
+        System.out.println(serviceType.passwordValidator("sssSSSSS"));
+        System.out.println(serviceType.passwordValidator("ssSS55SS"));
+        System.out.println(serviceType.passwordValidator("sssSSS5@"));
     }
 
     private void loadProductDetails() throws SQLException {

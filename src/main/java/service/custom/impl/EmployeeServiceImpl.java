@@ -7,6 +7,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
@@ -17,11 +18,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDAO employeeDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
+    BasicPasswordEncryptor encryptor = new BasicPasswordEncryptor();
 
     @Override
     public EmployeeDTO loginUser(String id, String password) throws SQLException {
@@ -84,5 +85,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Integer passwordValidator(String password) {
+        if (password.length() < 8) return 1;//if length < 8
+        if (!password.matches(".*[A-Z].*")) return 2;// if not contains A-Z
+        if (!password.matches(".*[a-z].*")) return 3;// if not contains a-z
+        if (!password.matches(".*\\d.*")) return 4;// if not contains number
+        if (!password.matches(".*[@#$%^&+=!*/?()_\\-].*")) return 5;// if not contains symbol
+        return 0;// if password is ok
+
+    }
+
+    @Override
+    public String passwordEncrypter(String password) {
+        return encryptor.encryptPassword(password);
+    }
+
+    @Override
+    public Boolean checkPassword(String password,String hash) {
+        return encryptor.checkPassword(password, hash);
     }
 }
