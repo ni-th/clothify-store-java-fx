@@ -27,7 +27,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public boolean update(EmployeeEntity entity) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override

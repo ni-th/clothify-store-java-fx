@@ -35,10 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (Boolean.TRUE.equals(checkPassword(password, employeeEntity.getPassword()))){
             return new ModelMapper().map(employeeEntity, EmployeeDTO.class);
         }
-
         return null;
-
-
     }
 
     @Override
@@ -58,6 +55,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Boolean update(EmployeeDTO employeeDTO) {
+        EmployeeEntity mapped = new ModelMapper().map(employeeDTO, EmployeeEntity.class);
+        return employeeDAO.update(mapped);
+    }
+
+    @Override
     public EmployeeEntity searchByUserName(String username) throws SQLException {
         return employeeDAO.searchByUserName(username);
     }
@@ -70,7 +73,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override

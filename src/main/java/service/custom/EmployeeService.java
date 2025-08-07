@@ -11,6 +11,7 @@ public interface EmployeeService extends SuperService {
     EmployeeDTO loginUser(String id, String password) throws SQLException;
     List<EmployeeDTO> getAll();
     Boolean add(EmployeeDTO employee);
+    Boolean update(EmployeeDTO employeeDTO);
     EmployeeEntity searchByUserName(String username) throws SQLException;
     Boolean creatAdmin();
     void generateReport();

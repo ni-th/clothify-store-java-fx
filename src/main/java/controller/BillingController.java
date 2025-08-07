@@ -181,13 +181,6 @@ public class BillingController implements Initializable {
         setTxtOrderID();//when purchase completed. update the order id
     }
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
-        EmployeeService serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
-        System.out.println(serviceType.passwordValidator("sss"));
-        System.out.println(serviceType.passwordValidator("ssssssss"));
-        System.out.println(serviceType.passwordValidator("SSSSSSSS"));
-        System.out.println(serviceType.passwordValidator("sssSSSSS"));
-        System.out.println(serviceType.passwordValidator("ssSS55SS"));
-        System.out.println(serviceType.passwordValidator("sssSSS5@"));
     }
 
     private void loadProductDetails() throws SQLException {
