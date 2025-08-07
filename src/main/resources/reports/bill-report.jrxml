@@ -59,7 +59,7 @@
 			<text><![CDATA[CLOTHIFY FASHION STORE]]></text>
 		</element>
 		<element kind="image" uuid="1299ae7e-87d0-4ada-be6b-ed6c8f79edd0" x="0" y="0" width="79" height="75" linkType="None" linkTarget="Self" lazy="true">
-			<expression><![CDATA["C:/Users/niman/Pictures/me.jpg"]]></expression>
+			<expression><![CDATA["src/main/resources/images/1.png"]]></expression>
 		</element>
 	</title>
 	<pageHeader height="52" splitType="Stretch">
