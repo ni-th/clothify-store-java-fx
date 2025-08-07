@@ -20,6 +20,7 @@ import service.custom.ProductService;
 import util.ServiceType;
 import util.SessionManager;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -190,7 +191,7 @@ public class BillingController implements Initializable {
         ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         String txtProductIDText = txtProductID.getText();
-        ProductDTO productDTO = productService.searchById(Integer.parseInt(txtProductIDText));
+        ProductDTO productDTO = txtProductIDText.isEmpty() ? null :productService.searchById(Integer.parseInt(txtProductIDText));
         if (productDTO == null){
             lblName.setText("---------------------");
             lblStock.setText("---------------------");
@@ -204,7 +205,8 @@ public class BillingController implements Initializable {
         }
         lblName.setText(productDTO.getName());
 //        lblStock.setText(productDTO.getQty().toString());
-        if (!productDTO.getImage().isEmpty()){
+        String image = productDTO.getImage();
+        if (!image.isEmpty() && new File(String.valueOf(image)).exists()){
             imgProduct.setImage(new Image(productDTO.getImage()));
         }else{
             imgProduct.setImage(new Image("images/no-image.png"));
