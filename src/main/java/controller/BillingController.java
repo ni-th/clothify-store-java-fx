@@ -18,6 +18,7 @@ import model.dto.ProductDTO;
 import service.ServiceFactory;
 import service.SuperService;
 import service.custom.CartItemService;
+import service.custom.EmailService;
 import service.custom.EmployeeService;
 import service.custom.ProductService;
 import util.ServiceType;
@@ -181,6 +182,8 @@ public class BillingController implements Initializable {
         setTxtOrderID();//when purchase completed. update the order id
     }
     public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
+//        EmailService serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.EMAIL);
+//        serviceType.sendMail("nimantha.bt@gmail.com", "from clothify", "Hello");
     }
 
     private void loadProductDetails() throws SQLException {

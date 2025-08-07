@@ -67,8 +67,6 @@ public class AdminLoginController implements Initializable {
         stage.getIcons().add(new Image(getClass().getResource("/images/ico.png").toExternalForm()));
         stage.show();
 
-
-
     }
 
 }
