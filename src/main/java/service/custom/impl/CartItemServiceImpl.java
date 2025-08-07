@@ -13,8 +13,10 @@ import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
 import repository.SuperRepository;
 import repository.custom.CartItemDAO;
+import service.ServiceFactory;
 import service.custom.CartItemService;
 import util.RepositoryType;
+import util.ServiceType;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -70,5 +72,16 @@ public class CartItemServiceImpl implements CartItemService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Integer generateOrderID() {
+        Integer lastID = getLastID();
+        if (lastID==null){
+            lastID=1000;
+        }else {
+            lastID+=1;
+        }
+        return lastID;
     }
 }

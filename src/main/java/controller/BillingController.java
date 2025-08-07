@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,7 @@ import util.ServiceType;
 import util.SessionManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -29,7 +31,6 @@ import java.util.ResourceBundle;
 public class BillingController implements Initializable {
 
     public ListView listView;
-
     public TableView tblCart;
     public TableColumn colTotal;
     public TableColumn colItemName;
@@ -84,6 +85,7 @@ public class BillingController implements Initializable {
         alert.setContentText(alertContent);
         alert.showAndWait();
     }
+
 //    Show Info Alert
     public void showOnfoAlert(String alertContent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,35 +93,23 @@ public class BillingController implements Initializable {
         alert.setContentText(alertContent);
         alert.showAndWait();
     }
+
 // Set Order ID
     private void setTxtOrderID(){
-        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
-        Integer lastID = cartItemService.getLastID();
-        if (lastID==null){
-            lastID=1000;
-        }else {
-            lastID+=1;
-        }
-        txtOrderID.setText(lastID.toString());
+        txtOrderID.setText(cartItemService.generateOrderID().toString());
     }
 //
-    private Boolean updateStock(Integer id) throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
-        ProductDTO productDTO = productService.searchById(id);
+    private void updateStock(Integer id) throws SQLException {
         Integer qty = cartItemQtyMap.get(id);
         int newQty = qty-Integer.parseInt(txtQty.getText());
         cartItemQtyMap.put(id,newQty);
         if (newQty<0) {
             showWarningAlert("Low Stock");
-            return false;
         }
         lblStock.setText(Integer.toString(newQty));
-        return true;
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
-
         if (txtQty.getText().isEmpty()){
             showWarningAlert("Qty is Empty");
             return;
@@ -164,31 +154,35 @@ public class BillingController implements Initializable {
     }
 
     public void btnOnActionPurchase(ActionEvent actionEvent) {
-        CartItemService cartItemService = ServiceFactory.getInstance().getServiceType(ServiceType.CARTITEM);
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
         cartItemMap.forEach((productID,qty) -> {
             try {
                 ProductDTO productDTO = productService.searchById(productID);
-                cartItemService.add(new CartItemDTO(Integer.parseInt(txtOrderID.getText()),SessionManager.getInstance().getUser().getId(), productDTO.getName(), productDTO.getId(), qty, productDTO.getSelling_price()));
+                cartItemService.add(
+                        new CartItemDTO(
+                                Integer.parseInt(txtOrderID.getText()),
+                                SessionManager.getInstance().getUser().getId(),
+                                productDTO.getName(),
+                                productDTO.getId(),
+                                qty,
+                                productDTO.getSelling_price()
+                        )
+                );
                 productService.updateQty(productID,qty);
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new IllegalArgumentException(e);
             }
         });
 
-        clear();
-        showOnfoAlert("Purchased :) ");
+        clear();// clear inputs
+        showOnfoAlert("Purchase successful!");
         cartItemService.generateReport(Integer.valueOf(txtOrderID.getText()));
         setTxtOrderID();//when purchase completed. update the order id
     }
-    public void updateQty(){
+    public void btnOnActionCheckAvailability(ActionEvent actionEvent) throws IOException {
 
-    }
-    public void btnOnActionCheckAvailability(ActionEvent actionEvent) {
     }
 
     private void loadProductDetails() throws SQLException {
-        ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
         String txtProductIDText = txtProductID.getText();
         ProductDTO productDTO = txtProductIDText.isEmpty() ? null :productService.searchById(Integer.parseInt(txtProductIDText));
@@ -204,14 +198,12 @@ public class BillingController implements Initializable {
             return;
         }
         lblName.setText(productDTO.getName());
-//        lblStock.setText(productDTO.getQty().toString());
         String image = productDTO.getImage();
         if (!image.isEmpty() && new File(String.valueOf(image)).exists()){
             imgProduct.setImage(new Image(productDTO.getImage()));
         }else{
             imgProduct.setImage(new Image("images/no-image.png"));
         }
-
         lblStock.setText(cartItemQtyMap.get(productDTO.getId()).toString());
         lblCategory.setText(productDTO.getCategory());
         lblSize.setText(productDTO.getSize());
@@ -225,26 +217,25 @@ public class BillingController implements Initializable {
     public void OnKeyRelesed(KeyEvent keyEvent) throws SQLException {
         loadProductDetails();
     }
-     private void clear(){
-         cartItemMap.clear();
-         tblCart.getItems().clear();
-         lblName.setText("---------------------");
-         lblStock.setText("---------------------");
-         lblCategory.setText("---------------------");
-         lblSize.setText("---------------------");
-         lblColor.setText("---------------------");
-         lblPrice.setText("---------------------");
-         btnAdd.setDisable(true);
-         txtQty.setDisable(true);
-         txtProductID.clear();
-         txtQty.clear();
 
-     }
+//    clear inputs
+    private void clear(){
+        cartItemMap.clear();
+        tblCart.getItems().clear();
+        lblName.setText("---------------------");
+        lblStock.setText("---------------------");
+        lblCategory.setText("---------------------");
+        lblSize.setText("---------------------");
+        lblColor.setText("---------------------");
+        lblPrice.setText("---------------------");
+        btnAdd.setDisable(true);
+        txtQty.setDisable(true);
+        txtProductID.clear();
+        txtQty.clear();
+
+    }
     public void btnOnActionClear(ActionEvent actionEvent) {
         clear();
         showWarningAlert("Inputs Cleared");
-    }
-    private void generateBill(){
-
     }
 }

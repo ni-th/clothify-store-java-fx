@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -109,11 +108,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgProduct" fitHeight="262.0" fitWidth="279.0" layoutX="293.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/1.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="imgProduct" fitHeight="262.0" fitWidth="279.0" layoutX="293.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="243.0" layoutX="23.0" layoutY="402.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="603.0" />
             <JFXButton buttonType="RAISED" layoutX="399.0" layoutY="513.0" onAction="#btnOnActionCheckAvailability" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Check Availability" textAlignment="CENTER" textFill="WHITE">
                <font>

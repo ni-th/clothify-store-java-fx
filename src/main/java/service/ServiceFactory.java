@@ -19,6 +19,7 @@ public class ServiceFactory {
             case USER:return  (T) new UserServiceImpl();
             case SUPPLIER:return  (T) new SupplierServiceImpl();
             case CARTITEM:return  (T) new CartItemServiceImpl();
+            case EMAIL:return  (T) new CartItemServiceImpl();
         }
         return null;
     }
