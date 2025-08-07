@@ -52,7 +52,7 @@ public class AdminLoginController implements Initializable {
             return;
         }
         if (employeeService.loginUser(txtEmail.getText(), txtPassword.getText())==null){
-            showAlert("Admin not Existed!");
+            showAlert("Invalid username or password!");
             return;
         }
         EmployeeDTO employeeDTO = employeeService.loginUser(txtEmail.getText(), txtPassword.getText());

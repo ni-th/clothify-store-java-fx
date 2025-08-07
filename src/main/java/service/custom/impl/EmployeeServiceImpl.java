@@ -7,6 +7,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
@@ -31,9 +32,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employeeEntity == null){
             return null;
         }
-        if (employeeEntity.getPassword().equals(password)){
+        if (Boolean.TRUE.equals(checkPassword(password, employeeEntity.getPassword()))){
             return new ModelMapper().map(employeeEntity, EmployeeDTO.class);
         }
+
         return null;
 
 
@@ -62,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Boolean creatAdmin() {
-        EmployeeEntity employeeEntity = new EmployeeEntity(1, "admin", "admin@gmail.com", "a", "super-admin");
+        EmployeeEntity employeeEntity = new EmployeeEntity(1, "admin", "admin@gmail.com", passwordEncrypter("Admin@123"), "super-admin");
         try {
             return employeeDAO.creatAdmin(employeeEntity);
         } catch (SQLException e) {
@@ -106,5 +108,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Boolean checkPassword(String password,String hash) {
         return encryptor.checkPassword(password, hash);
+    }
+
+    @Override
+    public Boolean emailValidator(String email) {
+        return EmailValidator.getInstance().isValid(email);
     }
 }

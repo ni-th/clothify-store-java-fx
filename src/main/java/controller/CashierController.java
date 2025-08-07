@@ -73,11 +73,15 @@ public class CashierController implements Initializable {
             showErrorAlert("Field is required");
             return;
         }
-        String txtEmpIDText = txtEmpID.getText();
+//        String txtEmpIDText = txtEmpID.getText();
         String txtEmpNameText = txtEmpName.getText();
         String txtEmpPasswordText = txtEmpPassword.getText();
         String txtEmpEmailText = txtEmpEmail.getText();
         String cmbEmployeeTypeValue = cmbEmployeeType.getValue().toString();
+        if (!employeeService.emailValidator(txtEmpEmailText)){
+            showErrorAlert("Insert valid Email!");
+            return;
+        }
 
         if (employeeService.searchByUserName(txtEmpEmailText) != null){
             showInfoAlert("Email Exist!");
@@ -102,7 +106,6 @@ public class CashierController implements Initializable {
             return;
         }
 
-
         Boolean added = employeeService.add(
                 new EmployeeDTO(
                         null,
@@ -126,6 +129,10 @@ public class CashierController implements Initializable {
         }
         if (supplierService.searchByUserName(txtSuplierEmail.getText()) != null){
             showInfoAlert("Email Exist!");
+            return;
+        }
+        if (!employeeService.emailValidator(txtSuplierEmail.getText())){
+            showErrorAlert("Insert valid Email!");
             return;
         }
         String txtSuplierIDText = txtSuplierID.getText();

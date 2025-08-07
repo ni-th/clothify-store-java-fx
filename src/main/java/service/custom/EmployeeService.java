@@ -17,4 +17,5 @@ public interface EmployeeService extends SuperService {
     Integer passwordValidator(String password);
     String passwordEncrypter(String password);
     Boolean checkPassword(String password,String hash);
+    Boolean emailValidator(String email);
 }
