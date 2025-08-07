@@ -116,4 +116,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Boolean emailValidator(String email) {
         return EmailValidator.getInstance().isValid(email);
     }
+
+    @Override
+    public Boolean deleteByID(Integer id) {
+        try {
+            return employeeDAO.deleteById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

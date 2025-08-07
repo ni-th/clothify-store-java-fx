@@ -8,4 +8,5 @@ import java.sql.SQLException;
 
 public interface SupplierDAO extends CrudRepository<SupplierEntity, Integer> {
     SupplierEntity searchByUserName(String username) throws SQLException;
+    Boolean deleteByUserName(String email) throws SQLException;
 }

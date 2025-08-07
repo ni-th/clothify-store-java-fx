@@ -36,19 +36,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXTextField editable="false" layoutX="570.0" layoutY="48.0" prefHeight="25.0" prefWidth="199.0" promptText="Product ID" />
-            <JFXTextField disable="true" layoutX="570.0" layoutY="88.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Name" />
-            <JFXComboBox disable="true" layoutX="570.0" layoutY="127.0" prefHeight="25.0" prefWidth="199.0" promptText="Category" />
-            <JFXTextField disable="true" layoutX="571.0" layoutY="171.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Color" />
-            <JFXTextField disable="true" layoutX="571.0" layoutY="210.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Size" />
-            <JFXTextField disable="true" layoutX="798.0" layoutY="48.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Image Link" />
-            <JFXTextField disable="true" layoutX="799.0" layoutY="88.0" prefHeight="25.0" prefWidth="197.0" promptText="Product qty" />
-            <JFXTextField disable="true" layoutX="799.0" layoutY="131.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Cost Price" />
-            <JFXTextField disable="true" layoutX="798.0" layoutY="170.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Selling Price" />
-            <JFXComboBox disable="true" layoutX="798.0" layoutY="208.0" prefHeight="25.0" prefWidth="199.0" promptText="Supplier" />
-            <DatePicker disable="true" layoutX="799.0" layoutY="254.0" prefHeight="25.0" prefWidth="198.0" promptText="Added Date" />
-            <JFXTextArea disable="true" layoutX="570.0" layoutY="254.0" prefHeight="99.0" prefWidth="204.0" promptText="Product Description" />
-            <JFXButton buttonType="RAISED" disable="true" layoutX="798.0" layoutY="323.0" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Update" textAlignment="CENTER" textFill="WHITE">
+            <JFXTextField fx:id="txtUpdateProductID" layoutX="570.0" layoutY="48.0" onKeyReleased="#OnKeyRelesedUpdateProduct" prefHeight="25.0" prefWidth="199.0" promptText="Product ID" />
+            <JFXTextField fx:id="txtUpdateProductName" disable="true" layoutX="570.0" layoutY="88.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Name" />
+            <JFXComboBox fx:id="cmbUpdateProductCategory" disable="true" layoutX="570.0" layoutY="127.0" prefHeight="25.0" prefWidth="199.0" promptText="Category" />
+            <JFXTextField fx:id="txtUpdateProductColor" disable="true" layoutX="571.0" layoutY="171.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Color" />
+            <JFXTextField fx:id="txtUpdateProductImageLink" disable="true" layoutX="798.0" layoutY="48.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Image Link" />
+            <JFXTextField fx:id="txtUpdateProductQty" disable="true" layoutX="799.0" layoutY="88.0" prefHeight="25.0" prefWidth="197.0" promptText="Product qty" />
+            <JFXTextField fx:id="txtUpdateProductCostPrice" disable="true" layoutX="799.0" layoutY="131.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Cost Price" />
+            <JFXTextField fx:id="txtUpdateProductSellingPrice" disable="true" layoutX="798.0" layoutY="170.0" prefHeight="25.0" prefWidth="197.0" promptText="Product Selling Price" />
+            <JFXComboBox fx:id="cmbUpdateProductSuppliers" disable="true" layoutX="798.0" layoutY="208.0" prefHeight="25.0" prefWidth="199.0" promptText="Supplier" />
+            <DatePicker fx:id="txtUpdateProductAddedDate" disable="true" layoutX="799.0" layoutY="254.0" prefHeight="25.0" prefWidth="198.0" promptText="Added Date" />
+            <JFXTextArea fx:id="txtUpdateProductDescription" disable="true" layoutX="570.0" layoutY="254.0" prefHeight="99.0" prefWidth="204.0" promptText="Product Description" />
+            <JFXButton fx:id="btnUpdateProduct" buttonType="RAISED" disable="true" layoutX="798.0" layoutY="323.0" onAction="#btnOnActionProductUpdate" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Update" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -57,8 +56,8 @@
                </cursor>
             </JFXButton>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="71.0" layoutX="23.0" layoutY="414.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="476.0" />
-            <JFXTextField fx:id="txtPruductIDDelete" editable="false" layoutX="41.0" layoutY="435.0" prefHeight="25.0" prefWidth="190.0" promptText="Product ID" />
-            <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="429.0" onAction="#btnOnActionDelete" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Delete" textAlignment="CENTER" textFill="WHITE">
+            <JFXTextField fx:id="txtPruductIDDelete" layoutX="41.0" layoutY="435.0" prefHeight="25.0" prefWidth="190.0" promptText="Product ID" />
+            <JFXButton fx:id="btnProductDelete" buttonType="RAISED" layoutX="274.0" layoutY="429.0" onAction="#btnOnActionDelete" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #523dee;" text="Delete" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -81,6 +80,7 @@
                   <Font name="Calibri Bold" size="21.0" />
                </font>
             </Label>
+            <JFXComboBox fx:id="cmbUpdateProductSize" disable="true" layoutX="570.0" layoutY="214.0" prefHeight="25.0" prefWidth="199.0" promptText="Product Size" />
          </children>
       </AnchorPane>
    </children>

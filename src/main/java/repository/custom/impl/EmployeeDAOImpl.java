@@ -2,6 +2,7 @@ package repository.custom.impl;
 
 import model.dto.EmployeeDTO;
 import model.entity.EmployeeEntity;
+import model.entity.ProductEntity;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -36,8 +37,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean deleteById(Integer s) {
-        return false;
+    public boolean deleteById(Integer s) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        EmployeeEntity employeeEntity =  searchById(s);
+        if (employeeEntity != null){
+            session.delete(employeeEntity);
+            transaction.commit();
+            session.close();
+            return true;
+        }else{
+            transaction.rollback();
+            session.close();
+            return false;
+        }
     }
 
     @Override

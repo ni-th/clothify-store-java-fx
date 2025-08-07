@@ -33,6 +33,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Boolean update(ProductDTO productDTO) {
+        return productDAO.update(new ModelMapper().map(productDTO, ProductEntity.class));
+    }
+
+    @Override
+    public Boolean deleteByID(Integer id) {
+        try {
+            return productDAO.deleteById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public ProductDTO searchById(Integer id) throws SQLException {
         if (productDAO.searchById(id) == null){
             return null;
@@ -72,6 +86,8 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e);
         }
     }
+
+
 
 
 }

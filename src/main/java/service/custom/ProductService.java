@@ -14,4 +14,6 @@ public interface ProductService extends SuperService {
     List<ProductDTO> getAll();
     Boolean updateQty(Integer id, Integer qty) throws SQLException;
     void generateReport();
+    Boolean update(ProductDTO productDTO);
+    Boolean deleteByID(Integer id);
 }

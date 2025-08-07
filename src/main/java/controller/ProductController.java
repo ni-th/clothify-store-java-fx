@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -9,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.input.KeyEvent;
 import model.dto.ProductDTO;
 import model.dto.SupplierDTO;
 import service.ServiceFactory;
@@ -17,6 +19,8 @@ import service.custom.SupplierService;
 import util.ServiceType;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,6 +43,21 @@ public class ProductController implements Initializable {
 
     public JFXTextField txtPruductIDDelete;
 
+    public JFXTextField txtUpdateProductID;
+    public JFXTextField txtUpdateProductName;
+    public JFXComboBox cmbUpdateProductCategory;
+    public JFXTextField txtUpdateProductColor;
+    public JFXComboBox cmbUpdateProductSize;
+    public JFXTextField txtUpdateProductQty;
+    public JFXTextField txtUpdateProductImageLink;
+    public JFXTextField txtUpdateProductCostPrice;
+    public JFXTextField txtUpdateProductSellingPrice;
+    public JFXComboBox cmbUpdateProductSuppliers;
+    public DatePicker txtUpdateProductAddedDate;
+    public JFXTextArea txtUpdateProductDescription;
+    public JFXButton btnUpdateProduct;
+    public JFXButton btnProductDelete;
+
     SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
     ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
@@ -58,15 +77,18 @@ public class ProductController implements Initializable {
 
         );
         cmbProductCategory.setItems(optionsCategory);
+        cmbUpdateProductCategory.setItems(optionsCategory);
 
         //        set combo box values
         ObservableList<String> optionsSuppliers = FXCollections.observableList(getAllSuppliers());
 
         cmbProductSuppliers.setItems(optionsSuppliers);
+        cmbUpdateProductSuppliers.setItems(optionsSuppliers);
 
         //        set combo box values
         ObservableList<String> optionsSize = FXCollections.observableArrayList("XS", "S", "M", "L", "XL", "XXL");
         cmbProductSize.setItems(optionsSize);
+        cmbUpdateProductSize.setItems(optionsSize);
     }
 
     public void btnOnActionUpdatePassword(ActionEvent actionEvent) {
@@ -109,23 +131,30 @@ public class ProductController implements Initializable {
     }
 
     public void btnOnActionProductAdd(ActionEvent actionEvent) {
-        String txtProductIDText = txtProductID.getText();
-        String txtProductNameText = txtProductName.getText();
-        String txtCategory = cmbProductCategory.getValue().toString();
-        String txtProductColorText = txtProductColor.getText();
-        String txtProductSizeText = cmbProductSize.getValue().toString();
-        String txtProductImageLinkText = txtProductImageLink.getText();
-        String txtProductQtyText = txtProductQty.getText();
-        String txtProductCostPriceText = txtProductCostPrice.getText();
-        String txtProductSellingPriceText = txtProductSellingPrice.getText();
-        String txtUserType = cmbProductSuppliers.getValue().toString();
-        String txtProductAddDate = txtProductAddedDate.getValue().toString();
-        String txtProductDescriptionText = txtProductDescription.getText();
-        if (txtProductNameText.isEmpty() || txtCategory.isEmpty() || txtProductColorText.isEmpty() ||
-                txtProductSizeText.isEmpty() || txtProductImageLinkText.isEmpty() || txtProductQtyText.isEmpty() ||
-                txtProductCostPriceText.isEmpty() || txtProductSellingPriceText.isEmpty() || txtUserType.isEmpty() ||
-                txtProductAddDate.isEmpty() || txtProductDescriptionText.isEmpty()){
-
+        String txtProductIDText = txtProductID.getText()!= null ? txtProductID.getText() : "";
+        String txtProductNameText = txtProductName.getText()!= null ? txtProductName.getText() : "";
+        String txtCategory = cmbProductCategory.getValue()!= null ? cmbProductCategory.getValue().toString() : "";
+        String txtProductColorText = txtProductColor.getText()!= null ? txtProductColor.getText() : "";
+        String txtProductSizeText = cmbProductSize.getValue()!= null ? cmbProductSize.getValue().toString() : "";
+        String txtProductImageLinkText = txtProductImageLink.getText()!= null ? txtProductImageLink.getText() : "";
+        String txtProductQtyText = txtProductQty.getText()!= null ? txtProductQty.getText() : "";
+        String txtProductCostPriceText = txtProductCostPrice.getText()!= null ? txtProductCostPrice.getText() : "";
+        String txtProductSellingPriceText = txtProductSellingPrice.getText()!= null ? txtProductSellingPrice.getText() : "";
+        String txtUserType = cmbProductSuppliers.getValue()!= null ? cmbProductSuppliers.getValue().toString() : "";
+        String txtProductAddDate = txtProductAddedDate.getValue()!= null ? txtProductAddedDate.getValue().toString() : "";
+        String txtProductDescriptionText = txtProductDescription.getText()!= null ? txtProductDescription.getText() : "";
+        if (txtProductNameText.isEmpty()
+                || txtCategory.isEmpty()
+                || txtProductColorText.isEmpty()
+                || txtProductSizeText.isEmpty()
+                || txtProductImageLinkText.isEmpty()
+                || txtProductQtyText.isEmpty()
+                || txtProductCostPriceText.isEmpty()
+                || txtProductSellingPriceText.isEmpty()
+                || txtUserType.isEmpty()
+                || txtProductAddDate.isEmpty()
+                || txtProductDescriptionText.isEmpty())
+        {
             showErrorAlert("Field is required");
             return;
         }
@@ -160,10 +189,114 @@ public class ProductController implements Initializable {
     }
 
     public void btnOnActionDelete(ActionEvent actionEvent) {
+        Boolean isDeleted =txtPruductIDDelete.getText() != null ? productService.deleteByID(Integer.valueOf(txtPruductIDDelete.getText())) : null;
+        if (isDeleted){
+            showInfoAlert("Product Deleted Successfully");
+        }else{
+            showInfoAlert("Product Not Found");
+        }
+
     }
 
 
     public void btnOnActionGenerateProductReport(ActionEvent actionEvent) {
         productService.generateReport();
+    }
+
+    public void OnKeyRelesedUpdateProduct(KeyEvent keyEvent) throws SQLException {
+        ProductDTO productDTO = txtUpdateProductID.getText().isEmpty() ? null :  productService.searchById(Integer.valueOf(txtUpdateProductID.getText()));
+        if (productDTO == null) setDisableUpdateSection(Boolean.TRUE);
+
+        txtUpdateProductID.setText(String.valueOf(productDTO.getId()));
+        txtUpdateProductName.setText(productDTO.getName());
+//        cmbUpdateProductCategory.setValue(productDTO.getCategory());
+        txtUpdateProductColor.setText(productDTO.getColor());
+//          cmbUpdateProductSize.setValue(productDTO.getSize());
+        txtUpdateProductQty.setText(productDTO.getQty().toString());
+        txtUpdateProductImageLink.setText(productDTO.getImage());
+        txtUpdateProductCostPrice.setText(String.valueOf(productDTO.getCost_price()));
+        txtUpdateProductSellingPrice.setText(String.valueOf(productDTO.getSelling_price()));
+        cmbUpdateProductSuppliers.setValue(productDTO.getSupplier());
+//          txtUpdateProductAddedDate.setValue(LocalDate.parse(productDTO.getAdded_date()));
+        txtUpdateProductDescription.setText(productDTO.getDescription());
+        setDisableUpdateSection(Boolean.FALSE);
+
+
+
+    }
+    private void setDisableUpdateSection(Boolean b) {
+        txtUpdateProductID.setDisable(b);
+        txtUpdateProductName.setDisable(b);
+        cmbUpdateProductCategory.setDisable(b);
+        txtUpdateProductColor.setDisable(b);
+        cmbUpdateProductSize.setDisable(b);
+        txtUpdateProductQty.setDisable(b);
+        txtUpdateProductImageLink.setDisable(b);
+        txtUpdateProductCostPrice.setDisable(b);
+        txtUpdateProductSellingPrice.setDisable(b);
+        cmbUpdateProductSuppliers.setDisable(b);
+//        txtUpdateProductAddedDate.setDisable(b);
+        txtUpdateProductDescription.setDisable(b);
+        btnUpdateProduct.setDisable(b);
+    }
+
+
+    public void btnOnActionProductUpdate(ActionEvent actionEvent) {
+        String txtUpdateProductIDText = txtUpdateProductID.getText() != null ? txtUpdateProductID.getText() : "";
+        String txtUpdateProductNameText = txtUpdateProductName.getText() != null ? txtUpdateProductName.getText() : "";
+        String txtUpdateCategory = cmbUpdateProductCategory.getValue() != null ?  cmbUpdateProductCategory.getValue().toString() : "";
+        String txtUpdateProductColorText = txtUpdateProductColor.getText() != null ? txtUpdateProductColor.getText() : "";
+        String txtUpdateProductSizeText = cmbUpdateProductSize.getValue() != null ? cmbUpdateProductSize.getValue().toString() : "";
+        String txtUpdateProductImageLinkText = txtUpdateProductImageLink.getText() != null ? txtUpdateProductImageLink.getText() : "";
+        String txtUpdateProductQtyText = txtUpdateProductQty.getText() != null ? txtUpdateProductQty.getText() : "";
+        String txtUpdateProductCostPriceText = txtUpdateProductCostPrice.getText() != null ? txtUpdateProductCostPrice.getText() : "";
+        String txtUpdateProductSellingPriceText = txtUpdateProductSellingPrice.getText() != null ? txtUpdateProductSellingPrice.getText() : "";
+        String txtUpdateUserType = cmbUpdateProductSuppliers.getValue() != null ? cmbUpdateProductSuppliers.getValue().toString() : "";
+//        String txtUpdateProductAddDate = txtUpdateProductAddedDate.getValue() != null ? txtUpdateProductAddedDate.getValue().toString() : "";
+        String txtUpdateProductDescriptionText = txtUpdateProductDescription.getText() != null ? txtUpdateProductDescription.getText() : "";
+        if (
+                txtUpdateProductNameText.isEmpty()
+                        || txtUpdateCategory.isEmpty()
+                        || txtUpdateProductColorText.isEmpty()
+                        || txtUpdateProductSizeText.isEmpty()
+                        || txtUpdateProductImageLinkText.isEmpty()
+                        || txtUpdateProductQtyText.isEmpty()
+                        || txtUpdateProductCostPriceText.isEmpty()
+                        || txtUpdateProductSellingPriceText.isEmpty()
+                        || txtUpdateUserType.isEmpty()
+//                        || txtUpdateProductAddDate.isEmpty()
+                        || txtUpdateProductDescriptionText.isEmpty()){
+            showErrorAlert("Field is required");
+            return;
+        }
+        try{
+            Integer.parseInt(txtUpdateProductQtyText);
+            Double.parseDouble(txtUpdateProductCostPriceText);
+            Double.parseDouble(txtUpdateProductSellingPriceText);
+        } catch (RuntimeException e) {
+            showErrorAlert("Check Your Inputs");
+            return;
+        }
+
+        Boolean IsUpdated = productService.update(new ProductDTO(
+                Integer.parseInt(txtUpdateProductIDText),
+                null,
+                txtUpdateProductNameText,
+                txtUpdateCategory,
+                txtUpdateProductColorText,
+                txtUpdateProductSizeText,
+                txtUpdateProductImageLinkText,
+                Integer.parseInt(txtUpdateProductQtyText),
+                Double.parseDouble(txtUpdateProductCostPriceText),
+                Double.parseDouble(txtUpdateProductSellingPriceText),
+                txtUpdateUserType,
+                null,
+                txtUpdateProductDescriptionText
+        ));
+        if (Boolean.TRUE.equals(IsUpdated)){
+            showInfoAlert("Product Updated Successfully");
+        }else{
+            showInfoAlert("Product Not Updated");
+        }
     }
 }

@@ -39,4 +39,13 @@ public class SupplierServiceImpl implements SupplierService {
     public void generateReport() {
 
     }
+
+    @Override
+    public Boolean deleteByUsername(String email) {
+        try {
+            return supplierDAO.deleteByUserName(email);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

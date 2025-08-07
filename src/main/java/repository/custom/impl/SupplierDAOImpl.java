@@ -34,7 +34,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public SupplierEntity searchById(Integer s) throws SQLException {
+    public SupplierEntity searchById(Integer s) {
         return null;
     }
 
@@ -69,5 +69,22 @@ public class SupplierDAOImpl implements SupplierDAO {
                 .uniqueResult();
         session.getTransaction().commit();
         return supplier;
+    }
+
+    @Override
+    public Boolean deleteByUserName(String email) throws SQLException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        SupplierEntity supplierEntity = searchByUserName(email);
+        if (supplierEntity != null){
+            session.delete(supplierEntity);
+            transaction.commit();
+            session.close();
+            return true;
+        }else{
+            transaction.rollback();
+            session.close();
+            return false;
+        }
     }
 }

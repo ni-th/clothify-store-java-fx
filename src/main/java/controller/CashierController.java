@@ -32,6 +32,7 @@ public class CashierController implements Initializable {
     public JFXTextField txtSuplierID;
     public JFXTextField txtEmployeeDelete;
     public JFXTextField txtEmpEmail;
+    public JFXTextField txtSupplierDelete;
 
     EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
     SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
@@ -149,9 +150,24 @@ public class CashierController implements Initializable {
     }
 
     public void btnOnActionDeleteEmployee(ActionEvent actionEvent) {
+        Boolean isDeleted =txtEmployeeDelete.getText() != null ? employeeService.deleteByID(Integer.valueOf(txtEmployeeDelete.getText())) : null;
+        if (isDeleted){
+            showInfoAlert("Employee Deleted Successfully");
+        }else{
+            showInfoAlert("Employee Not Found");
+        }
     }
 
     public void btnOnActionGenerateEmployeeReport(ActionEvent actionEvent) {
         employeeService.generateReport();
+    }
+
+    public void btnOnActionDeleteSupplier(ActionEvent actionEvent) {
+        Boolean isDeleted =txtSupplierDelete.getText() != null ? supplierService.deleteByUsername(txtSupplierDelete.getText()) : null;
+        if (isDeleted){
+            showInfoAlert("Supplier Deleted Successfully");
+        }else{
+            showInfoAlert("Supplier Not Found");
+        }
     }
 }

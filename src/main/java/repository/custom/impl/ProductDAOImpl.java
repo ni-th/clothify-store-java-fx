@@ -23,13 +23,29 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public boolean update(ProductEntity entity) {
-
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
         return true;
     }
 
     @Override
     public boolean deleteById(Integer s) {
-        return false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        ProductEntity productEntity = searchById(s);
+        if (productEntity != null){
+            session.delete(productEntity);
+            transaction.commit();
+            session.close();
+            return true;
+        }else{
+            transaction.rollback();
+            session.close();
+            return false;
+        }
     }
 
     @Override

@@ -13,4 +13,5 @@ public interface SupplierService extends SuperService {
     List<SupplierDTO> getAll();
     SupplierEntity searchByUserName(String username) throws SQLException;
     void generateReport();
+    Boolean deleteByUsername(String email);
 }
