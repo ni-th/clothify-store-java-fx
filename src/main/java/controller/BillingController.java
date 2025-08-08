@@ -57,9 +57,9 @@ public class BillingController implements Initializable {
     public ImageView imgProduct;
 
     CartItemDTO cartItemDTO;
-    ObservableList<CartItemDTO> cartItemDTOObservableList = FXCollections.observableArrayList();
-    HashMap<Integer,Integer> cartItemMap = new HashMap<>();
-    HashMap<Integer,Integer> cartItemQtyMap = new HashMap<>();
+    ObservableList<CartItemDTO> cartItemDTOObservableList = FXCollections.observableArrayList(); // observable list for load table
+    HashMap<Integer,Integer> cartItemMap = new HashMap<>();// cart table
+    HashMap<Integer,Integer> cartItemQtyMap = new HashMap<>();// id with qty
     Double totalCost;
     CartItemService cartItemService;
     ProductService productService;
@@ -75,6 +75,7 @@ public class BillingController implements Initializable {
         setTxtOrderID();
         loadCartItemQtyMap();
     }
+//    initialize the product qty s
     private void loadCartItemQtyMap(){
         for (ProductDTO itemDTO : productService.getAll()) {
             cartItemQtyMap.put(itemDTO.getId(),itemDTO.getQty());
@@ -108,16 +109,21 @@ public class BillingController implements Initializable {
         cartItemQtyMap.put(id,newQty);
         if (newQty<0) {
             showWarningAlert("Low Stock");
+        }else {
+            lblStock.setText(Integer.toString(newQty));
         }
-        lblStock.setText(Integer.toString(newQty));
+
     }
 
     public void btnOnActionProductAddCart(ActionEvent actionEvent) throws SQLException {
         if (txtQty.getText().isEmpty()){
             showWarningAlert("Qty is Empty");
             return;
+        } else if (Integer.parseInt(txtQty.getText()) < 0) {
+            showWarningAlert("Qty must be a positive value");
+            return;
         }
-            cartItemDTOObservableList.clear();
+        cartItemDTOObservableList.clear();
             totalCost=0.0;
             if (cartItemMap.containsKey(Integer.parseInt(txtProductID.getText()))){
                 if (cartItemQtyMap.get(Integer.parseInt(txtProductID.getText())) < Integer.parseInt(txtQty.getText())) {
@@ -129,8 +135,13 @@ public class BillingController implements Initializable {
                 }
 
             }else{
-                cartItemMap.put(Integer.parseInt(txtProductID.getText()),Integer.parseInt(txtQty.getText()));
-                updateStock(Integer.parseInt(txtProductID.getText()));
+                if (cartItemQtyMap.get(Integer.parseInt(txtProductID.getText())) < Integer.parseInt(txtQty.getText())) {
+                    showWarningAlert("Low Stock");
+                }else{
+                    cartItemMap.put(Integer.parseInt(txtProductID.getText()),Integer.parseInt(txtQty.getText()));
+                    updateStock(Integer.parseInt(txtProductID.getText()));
+                }
+
             }
 
             //copy to observable array
@@ -241,6 +252,7 @@ public class BillingController implements Initializable {
     }
     public void btnOnActionClear(ActionEvent actionEvent) {
         clear();
+        loadCartItemQtyMap();
         showWarningAlert("Inputs Cleared");
     }
 }
