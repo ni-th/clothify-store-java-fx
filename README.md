@@ -8,8 +8,11 @@
 - Java (JavaFX)
 - MySQL
 - Hibernate
+- Email Validator
+- Password Encryptor
 - JasperReports (for billing/report generation)
 - Maven (Dependency Management)
+- jfoenix for UI
 - Scene Builder (for UI design)
 
 ## 🚀 Features
@@ -19,7 +22,12 @@
 - 👤 Producr & Staff Management
 - 📊 Generate Employee, Product Reports
 - 🧮 Automatic Stock and Pricing Updates
-- 🖨️ Print Bills using JasperReports
+- 🖨️ Print Bills using JasperReports## 🚀 Features
+
+## 🚀 Design Pattern & Architecture
+
+- Factory Design Pattern
+- Layered Architecture
 
 ## 📦 Prerequisites
 
