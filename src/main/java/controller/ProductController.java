@@ -308,4 +308,8 @@ public class ProductController implements Initializable {
             System.out.println("");
         }
     }
+
+    public void OnMouseClickedSupplierCmb(MouseEvent mouseEvent) {
+        refreshSupplierList();
+    }
 }

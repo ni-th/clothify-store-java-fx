@@ -49,8 +49,9 @@ public class CashierLoginController implements Initializable {
             showAlert("Field is Required!");
             return;
         }
+        System.out.println(employeeService.loginUser(txtEmail.getText(), txtPassword.getText())==null);
         if (employeeService.loginUser(txtEmail.getText(), txtPassword.getText())==null){
-            showAlert("Admin not Existed!");
+            showAlert("Invalid username or password!");
             return;
         }
         SessionManager.getInstance().setUser(employeeService.loginUser(txtEmail.getText(), txtPassword.getText()));

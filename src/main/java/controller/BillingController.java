@@ -203,7 +203,8 @@ public class BillingController implements Initializable {
         }
         lblName.setText(productDTO.getName());
         String image = productDTO.getImage();
-        if (!image.isEmpty() && new File(String.valueOf(image)).exists()){
+        if (!image.isEmpty() && !new Image(productDTO.getImage()).isError()){
+            boolean error = new Image(productDTO.getImage()).isError();
             imgProduct.setImage(new Image(productDTO.getImage()));
         }else{
             imgProduct.setImage(new Image("images/no-image.png"));

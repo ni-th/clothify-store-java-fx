@@ -15,8 +15,8 @@
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="176.0" layoutX="333.0" layoutY="22.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="185.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c4ccff" height="178.0" layoutX="23.0" layoutY="21.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="293.0" />
-            <JFXPasswordField fx:id="txtUpdatePassword1" layoutX="358.0" layoutY="87.0" promptText="password" />
-            <JFXPasswordField fx:id="txtUpdatePassword2" layoutX="359.0" layoutY="118.0" promptText="repeat password" />
+            <JFXPasswordField fx:id="txtUpdatePassword1" layoutX="358.0" layoutY="87.0" promptText="Password" />
+            <JFXPasswordField fx:id="txtUpdatePassword2" layoutX="359.0" layoutY="118.0" promptText="Repeat password" />
             <Label layoutX="37.0" layoutY="36.0" text="Admin Details">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
@@ -31,16 +31,16 @@
                </cursor>
             </JFXButton>
             <Label layoutX="44.0" layoutY="75.0" text="ID :" />
-            <Label fx:id="lblID" layoutX="90.0" layoutY="75.0" text="Nimantha" />
+            <Label fx:id="lblID" layoutX="90.0" layoutY="75.0" text="Clothify" />
             <Label layoutX="44.0" layoutY="114.0" text="Email :" />
-            <Label fx:id="lblEmail" layoutX="90.0" layoutY="114.0" text="Nimantha" />
+            <Label fx:id="lblEmail" layoutX="90.0" layoutY="114.0" text="Clothify" />
             <Label layoutX="349.0" layoutY="34.0" text="Update Details">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
             <Label layoutX="44.0" layoutY="95.0" text="Name :" />
-            <Label fx:id="lblName" layoutX="90.0" layoutY="95.0" text="Nimantha" />
+            <Label fx:id="lblName" layoutX="90.0" layoutY="95.0" text="Clothify" />
             <JFXTextField fx:id="txtUpdateName" layoutX="357.0" layoutY="57.0" promptText="Name" />
          </children>
       </AnchorPane>

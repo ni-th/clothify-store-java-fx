@@ -62,6 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO searchByUserName(String username) throws SQLException {
+        if(employeeDAO.searchByUserName(username) == null){
+            return null;
+        }
         return new ModelMapper().map(employeeDAO.searchByUserName(username), EmployeeDTO.class);
     }
 
