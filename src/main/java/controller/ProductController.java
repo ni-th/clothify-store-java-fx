@@ -10,9 +10,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import model.dto.ProductDTO;
 import model.dto.SupplierDTO;
+import model.entity.SupplierEntity;
 import service.ServiceFactory;
 import service.custom.ProductService;
 import service.custom.SupplierService;
@@ -20,7 +23,6 @@ import util.ServiceType;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -57,6 +59,7 @@ public class ProductController implements Initializable {
     public JFXTextArea txtUpdateProductDescription;
     public JFXButton btnUpdateProduct;
     public JFXButton btnProductDelete;
+    public Label lblSupplierName;
 
     SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
     ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
@@ -80,21 +83,18 @@ public class ProductController implements Initializable {
         cmbUpdateProductCategory.setItems(optionsCategory);
 
         //        set combo box values
-        ObservableList<String> optionsSuppliers = FXCollections.observableList(getAllSuppliers());
-
-        cmbProductSuppliers.setItems(optionsSuppliers);
-        cmbUpdateProductSuppliers.setItems(optionsSuppliers);
+        refreshSupplierList();
 
         //        set combo box values
         ObservableList<String> optionsSize = FXCollections.observableArrayList("XS", "S", "M", "L", "XL", "XXL");
         cmbProductSize.setItems(optionsSize);
         cmbUpdateProductSize.setItems(optionsSize);
     }
-
-    public void btnOnActionUpdatePassword(ActionEvent actionEvent) {
-
+    public void refreshSupplierList(){
+        ObservableList<String> optionsSuppliers = FXCollections.observableList(getAllSuppliers());
+        cmbProductSuppliers.setItems(optionsSuppliers);
+        cmbUpdateProductSuppliers.setItems(optionsSuppliers);
     }
-
 
     public void showInfoAlert(String alertContent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -140,7 +140,7 @@ public class ProductController implements Initializable {
         String txtProductQtyText = txtProductQty.getText()!= null ? txtProductQty.getText() : "";
         String txtProductCostPriceText = txtProductCostPrice.getText()!= null ? txtProductCostPrice.getText() : "";
         String txtProductSellingPriceText = txtProductSellingPrice.getText()!= null ? txtProductSellingPrice.getText() : "";
-        String txtUserType = cmbProductSuppliers.getValue()!= null ? cmbProductSuppliers.getValue().toString() : "";
+        String txtProductSupplier = cmbProductSuppliers.getValue()!= null ? cmbProductSuppliers.getValue().toString() : "";
         String txtProductAddDate = txtProductAddedDate.getValue()!= null ? txtProductAddedDate.getValue().toString() : "";
         String txtProductDescriptionText = txtProductDescription.getText()!= null ? txtProductDescription.getText() : "";
         if (txtProductNameText.isEmpty()
@@ -151,7 +151,7 @@ public class ProductController implements Initializable {
                 || txtProductQtyText.isEmpty()
                 || txtProductCostPriceText.isEmpty()
                 || txtProductSellingPriceText.isEmpty()
-                || txtUserType.isEmpty()
+                || txtProductSupplier.isEmpty()
                 || txtProductAddDate.isEmpty()
                 || txtProductDescriptionText.isEmpty())
         {
@@ -177,7 +177,7 @@ public class ProductController implements Initializable {
                 Integer.parseInt(txtProductQtyText),
                 Double.parseDouble(txtProductCostPriceText),
                 Double.parseDouble(txtProductSellingPriceText),
-                txtUserType,
+                txtProductSupplier,
                 txtProductAddDate,
                 txtProductDescriptionText
         ));
@@ -251,7 +251,7 @@ public class ProductController implements Initializable {
         String txtUpdateProductQtyText = txtUpdateProductQty.getText() != null ? txtUpdateProductQty.getText() : "";
         String txtUpdateProductCostPriceText = txtUpdateProductCostPrice.getText() != null ? txtUpdateProductCostPrice.getText() : "";
         String txtUpdateProductSellingPriceText = txtUpdateProductSellingPrice.getText() != null ? txtUpdateProductSellingPrice.getText() : "";
-        String txtUpdateUserType = cmbUpdateProductSuppliers.getValue() != null ? cmbUpdateProductSuppliers.getValue().toString() : "";
+        String txtUpdateSupplier = cmbUpdateProductSuppliers.getValue() != null ? cmbUpdateProductSuppliers.getValue().toString() : "";
 //        String txtUpdateProductAddDate = txtUpdateProductAddedDate.getValue() != null ? txtUpdateProductAddedDate.getValue().toString() : "";
         String txtUpdateProductDescriptionText = txtUpdateProductDescription.getText() != null ? txtUpdateProductDescription.getText() : "";
         if (
@@ -263,7 +263,7 @@ public class ProductController implements Initializable {
                         || txtUpdateProductQtyText.isEmpty()
                         || txtUpdateProductCostPriceText.isEmpty()
                         || txtUpdateProductSellingPriceText.isEmpty()
-                        || txtUpdateUserType.isEmpty()
+                        || txtUpdateSupplier.isEmpty()
 //                        || txtUpdateProductAddDate.isEmpty()
                         || txtUpdateProductDescriptionText.isEmpty()){
             showErrorAlert("Field is required");
@@ -289,7 +289,7 @@ public class ProductController implements Initializable {
                 Integer.parseInt(txtUpdateProductQtyText),
                 Double.parseDouble(txtUpdateProductCostPriceText),
                 Double.parseDouble(txtUpdateProductSellingPriceText),
-                txtUpdateUserType,
+                txtUpdateSupplier,
                 null,
                 txtUpdateProductDescriptionText
         ));
@@ -297,6 +297,15 @@ public class ProductController implements Initializable {
             showInfoAlert("Product Updated Successfully");
         }else{
             showInfoAlert("Product Not Updated");
+        }
+    }
+
+    public void OnActionSupplierCmb(ActionEvent actionEvent) {
+        if (cmbProductSuppliers.getValue() != null) {
+            SupplierEntity supplier = supplierService.searchByID((Integer.valueOf(cmbProductSuppliers.getValue().toString())) );
+            lblSupplierName.setText(supplier.getName()+" - "+supplier.getCompanyName());
+        } else {
+            System.out.println("");
         }
     }
 }

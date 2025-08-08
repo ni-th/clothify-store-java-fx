@@ -48,4 +48,13 @@ public class SupplierServiceImpl implements SupplierService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public SupplierEntity searchByID(Integer id) {
+        try {
+            return supplierDAO.searchById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -14,4 +14,5 @@ public interface SupplierService extends SuperService {
     SupplierEntity searchByUserName(String username) throws SQLException;
     void generateReport();
     Boolean deleteByUsername(String email);
+    SupplierEntity searchByID(Integer id);
 }

@@ -35,7 +35,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public SupplierEntity searchById(Integer s) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        SupplierEntity supplier = session.get(SupplierEntity.class,s);
+        session.getTransaction().commit();
+        return supplier;
     }
 
     @Override
