@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -32,7 +33,7 @@ public class ProductEntity {
     private Double cost_price;
     private Double selling_price;
     private String supplier;
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDate added_date;
     private String description;
 
