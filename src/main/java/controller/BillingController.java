@@ -162,7 +162,7 @@ public class BillingController implements Initializable {
                 }
             });
 
-            tblCart.setItems(cartItemDTOObservableList);
+            tblCart.setItems(cartItemDTOObservableList);//load to table
             lblTotal.setText(totalCost.toString());
 
     }

@@ -7,12 +7,13 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import model.dto.SupplierDTO;
 import model.entity.SupplierEntity;
@@ -23,7 +24,10 @@ import util.ServiceType;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -61,11 +65,34 @@ public class ProductController implements Initializable {
     public JFXButton btnProductDelete;
     public Label lblSupplierName;
 
+    public TableView tblProduct;
+    public TableColumn colProductID;
+    public TableColumn colProductName;
+    public TableColumn colProductCategory;
+    public TableColumn colProductColor;
+    public TableColumn colProductSize;
+    public TableColumn colProductQty;
+    public TableColumn colProductPrice;
+    public TableColumn colProductSupplier;
+    public TableColumn colProductAddedDate;
+    public TableColumn colProductDescription;
+
     SupplierService supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
     ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
+    ObservableList<ProductDTO> productDTOObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colProductID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colProductCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        colProductColor.setCellValueFactory(new PropertyValueFactory<>("color"));
+        colProductSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+        colProductQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colProductPrice.setCellValueFactory(new PropertyValueFactory<>("selling_price"));
+        colProductSupplier.setCellValueFactory(new PropertyValueFactory<>("supplier"));
+        colProductAddedDate.setCellValueFactory(new PropertyValueFactory<>("added_date"));
+        colProductDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 //        set combo box values
         ObservableList<String> optionsCategory = FXCollections.observableArrayList(
@@ -141,7 +168,7 @@ public class ProductController implements Initializable {
         String txtProductCostPriceText = txtProductCostPrice.getText()!= null ? txtProductCostPrice.getText() : "";
         String txtProductSellingPriceText = txtProductSellingPrice.getText()!= null ? txtProductSellingPrice.getText() : "";
         String txtProductSupplier = cmbProductSuppliers.getValue()!= null ? cmbProductSuppliers.getValue().toString() : "";
-        String txtProductAddDate = txtProductAddedDate.getValue()!= null ? txtProductAddedDate.getValue().toString() : "";
+        LocalDate txtProductAddDate = txtProductAddedDate.getValue()!= null ? LocalDate.parse(txtProductAddedDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) : LocalDate.parse("1000-10-10", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String txtProductDescriptionText = txtProductDescription.getText()!= null ? txtProductDescription.getText() : "";
         if (txtProductNameText.isEmpty()
                 || txtCategory.isEmpty()
@@ -152,7 +179,7 @@ public class ProductController implements Initializable {
                 || txtProductCostPriceText.isEmpty()
                 || txtProductSellingPriceText.isEmpty()
                 || txtProductSupplier.isEmpty()
-                || txtProductAddDate.isEmpty()
+                || txtProductAddDate.isEqual(LocalDate.parse("1000-10-10", DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                 || txtProductDescriptionText.isEmpty())
         {
             showErrorAlert("Field is required");
@@ -311,5 +338,13 @@ public class ProductController implements Initializable {
 
     public void OnMouseClickedSupplierCmb(MouseEvent mouseEvent) {
         refreshSupplierList();
+    }
+
+    public void ListOnSectionChanged(Event event) {
+        productDTOObservableList.clear();
+        productService.getAll().forEach(product -> {
+            productDTOObservableList.add(product);
+        });
+        tblProduct.setItems(productDTOObservableList);
     }
 }
