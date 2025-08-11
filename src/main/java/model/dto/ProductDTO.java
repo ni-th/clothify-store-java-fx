@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -22,7 +25,7 @@ public class ProductDTO {
     private Double cost_price;
     private Double selling_price;
     private String supplier;
-    private String added_date;
+    private LocalDate added_date;
     private String description;
 
 

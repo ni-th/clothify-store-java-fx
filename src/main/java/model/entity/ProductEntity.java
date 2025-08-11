@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -30,7 +33,7 @@ public class ProductEntity {
     private Double selling_price;
     private String supplier;
     @CreationTimestamp
-    private String added_date;
+    private LocalDate added_date;
     private String description;
 
 
